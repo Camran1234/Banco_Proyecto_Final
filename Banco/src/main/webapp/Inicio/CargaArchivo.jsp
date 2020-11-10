@@ -119,7 +119,7 @@
     <br><br>
     <label id="formsText">Cargar Archivos XML</label><br><br>
     
-    <form class="col-lg-6 offset-lg-4" method ="post" action="#">
+    <form class="col-lg-6 offset-lg-4" method ="post" action="../UploadFileXML" enctype="multipart/form-data">
             <span class="input-group-btn">
                 <input class="ex1" type="file" name = "file" accept='.xml' required>
                 <input type="submit" class="btn btn-primary" value="Subir Archivo">

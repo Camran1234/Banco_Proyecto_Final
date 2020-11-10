@@ -1,1 +1,15 @@
+Servlets/UploadFileXML.class
+File/UploadFiles/Gerente.class
+File/XmlParser/FileScanner.class
+File/ErrorHandlers/FormatException.class
+File/ParserData/ParserEmpleado.class
+File/ParserData/ParserTransaccion.class
+File/UploadFiles/Transaccion.class
+File/UploadFiles/Cliente.class
+File/XmlParser/DocumentParser.class
+File/XmlParser/XMLParser.class
+File/ParserData/ParserCliente.class
+File/UploadFiles/Cajero.class
+File/UploadFiles/Usuario.class
 SQL/Conexion/Conexion.class
+File/UploadFiles/Cuenta.class

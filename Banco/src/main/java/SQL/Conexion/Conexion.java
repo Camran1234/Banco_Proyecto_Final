@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class Conexion {
     //url para conectar con la base de datos, se esta manejando la base de datos INTELAF_DATA
-    private static final String urlBasica = "jdbc:mysql://localhost:3306/CODEHERO?useSSL=false";    
+    private static final String urlBasica = "jdbc:mysql://localhost:3306/BANCO?useSSL=false";    
     //Dejamos estatica la conexion para poder utilizarla en cualquier momento
     private static Connection connection;
     
@@ -59,7 +59,7 @@ public class Conexion {
                 try {
                     connection.close();
                 } catch (SQLException ex) {
-                    JOptionPane.showMessageDialog(null, "No existe conexion con la base de datos");
+                    //trow Exception
                 }
             }
         }

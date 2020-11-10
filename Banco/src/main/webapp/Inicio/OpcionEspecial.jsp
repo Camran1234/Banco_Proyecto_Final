@@ -127,7 +127,9 @@
                         <label id="TittleText">Contraseña</label>
                         <input type="password" name = "Password" placeholder="Ingrese su contraseña" size="50%" class="form-control" required/><br>
                         <input type="submit" class="ButtonOptions"  value="Iniciar Sesión" >
+                        <% if(mensaje!=null){ %>
                         <label id="ErrorText"><%=mensaje%></label>
+                        <% } %>
                 </div>
                 </div> 
         </div>
