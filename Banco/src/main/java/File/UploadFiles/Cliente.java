@@ -10,7 +10,9 @@ import File.ParserData.ParserCliente;
 import SQL.Conexion.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import org.w3c.dom.Element;
 
@@ -21,9 +23,9 @@ import org.w3c.dom.Element;
 public class Cliente extends Usuario{
     private String direccionPdf;
     private String fechaNacimiento;
-    private ArrayList<String> creditos;
-    private ArrayList<String> codigosCuentas;
-    private ArrayList<String> fechasCuentas;
+    private ArrayList<String> creditos = new ArrayList<>();
+    private ArrayList<String> codigosCuentas = new ArrayList<>();
+    private ArrayList<String> fechasCuentas = new ArrayList<>();
     private ParserCliente parser = new ParserCliente();
     
     public Cliente(Element elementoXML) throws FormatException{
@@ -39,6 +41,28 @@ public class Cliente extends Usuario{
         codigosCuentas = parser.returnCodigoCuentas();
         fechaNacimiento = parser.returnFechaNacimiento();
         direccionPdf = parser.returnDireccionPDF();
+    }
+
+    public Cliente(String nombre, String dpi, String direccion, String sexo, String fecha, String codigoUsuario, String password, String password2, String pathFile) throws FormatException{
+        if(dpi.length()!=15){                        
+            throw new FormatException (" El dpi no contiene 15 digitos ");                
+        }        
+        try{                            
+            Long.parseLong(dpi);                            
+        }catch(Exception ex){        
+            throw new FormatException (" El dpi no es un numero ");            
+        }
+        if(!password.equals(password2)){
+            throw new FormatException ("Las contraseñas no coinciden");
+        }
+        this.codigo = codigoUsuario;
+        this.nombre = nombre;
+        this.password = password;
+        this.sexo = sexo;
+        this.dpi = dpi;
+        this.direccion = direccion;
+        this.fechaNacimiento = fecha;
+        this.direccionPdf = pathFile;
     }
     
     @Override

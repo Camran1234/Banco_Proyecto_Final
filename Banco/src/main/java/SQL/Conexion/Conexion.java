@@ -38,7 +38,6 @@ public class Conexion {
                     Properties propiedades = new Properties();
                     propiedades.setProperty("user",user);
                     propiedades.setProperty("password",password);
-
                     connection = DriverManager.getConnection(urlBasica,propiedades);
                     System.out.println("Conexión exitosa");
                 }

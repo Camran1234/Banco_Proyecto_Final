@@ -66,6 +66,14 @@
         
         font-size: 16px;
       }
+      #ErrorText{
+        display: block;
+        text-align: center;
+        font-family: Verdana;
+        font-size: 15px;
+        font-weight: bolder;
+        color: Red;
+    }
    
 </style>
 <!DOCTYPE html>
@@ -103,20 +111,27 @@
         </ul>
     </nav>
     
-    
-    <div class="container">
-            <div class="row justify-content-center">
-            <div class="form-group col-md-4 col-md-offset-4 align-center ">
-                    <label id="formsText">Acceder Sesión</label><br>
-                    <span></span>
-                    <label id="TittleText">Usuario</label>
-                    <input type="text" placeholder="Ingrese su codigo de usuario" size="50%" class="form-control" required/>
-                    <label id="TittleText">Contraseña</label>
-                    <input type="password" placeholder="Ingrese su contraseña" size="50%" class="form-control" required/><br>
-                    <input type="submit" class="ButtonOptions"  value="Iniciar Sesión" >
-            </div>
-            </div> 
-    </div>
+    <form method ="post" action="./Inicio/RedireccionadorUsuario.jsp">
+        <div class="container">
+                <div class="row justify-content-center">
+                    <div class="form-group col-md-4 col-md-offset-4 align-center ">
+                            <label id="formsText">Acceder Sesión</label><br>
+                            <span></span>
+                            <label id="TittleText">Usuario</label>
+                            <input type="text" name = "Codigo" placeholder="Ingrese su codigo de usuario" size="50%" class="form-control" required/>
+                            <label id="TittleText">Contraseña</label>
+                            <input type="password" name = "Password" placeholder="Ingrese su contraseña" size="50%" class="form-control" required/><br>
+                            <input type="submit"  class="ButtonOptions"  value="Iniciar Sesión" >
+                            <%  String mensaje =(String) session.getAttribute("Mensaje");
+                                session.setAttribute("Mensaje", null);
+                                if(mensaje!=null){ %>
+                            <label id="ErrorText"><%=mensaje%></label>
+                            <% } %>
+                    </div>
+                </div> 
+        </div>
+        
+    </form>
     
     
 

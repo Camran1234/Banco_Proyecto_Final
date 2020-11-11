@@ -28,7 +28,7 @@ public class Cajero extends Usuario{
         password = parser.returnPassword();
         sexo = parser.returnSexo();
         dpi = parser.returnDpi();
-        turno = parser.returnNombre();
+        turno = parser.returnTurno();
         direccion = parser.returnDireccion();
     }
     
