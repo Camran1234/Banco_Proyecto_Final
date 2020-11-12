@@ -24,8 +24,8 @@ public class ActualizadorCajero {
     private String turno;
 
     public ActualizadorCajero(String nombre, String dpi, String direccion, String sexo, String turno, String codigoUsuario, String password, String password2) throws FormatException {
-        if(dpi.length()!=15){                        
-            throw new FormatException (" El dpi no contiene 15 digitos ");                
+        if(dpi.length()!=13){                        
+            throw new FormatException (" El dpi no contiene 13 digitos ");                
         }        
         try{                            
             Long.parseLong(dpi);                            

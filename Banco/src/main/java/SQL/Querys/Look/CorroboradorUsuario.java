@@ -98,4 +98,56 @@ public class CorroboradorUsuario {
         }   
         return null;
     }
+    
+    public String GetDpi(String codigo){
+        try {  
+            //Comprobaremos en que tabla se encuentra el codigo el usuario
+            //para devolver un valor que indicara el usuario que esta usando
+            //corroboracion para administrador
+            
+            String comprobadorCodigo=null;
+            Connection connection = new Conexion().CreateConnection();
+            String comando = "SELECT DPI FROM GERENTE WHERE NoUsuario=(?)";
+            PreparedStatement statement = null;
+            statement = connection.prepareStatement(comando);
+            statement.setString(1, codigo);
+            ResultSet resultado = statement.executeQuery();
+            if(resultado.next()){
+                comprobadorCodigo = resultado.getString("DPI");
+                System.out.println(comprobadorCodigo);
+                if(comprobadorCodigo.equalsIgnoreCase("")==false || comprobadorCodigo!=null){
+                    return comprobadorCodigo;
+                }
+            }
+            
+            comando = "SELECT DPI FROM CLIENTE WHERE NoUsuario=(?)";
+            statement = connection.prepareStatement(comando);
+            statement.setString(1, codigo);
+             resultado = statement.executeQuery();
+            if(resultado.next()){
+                comprobadorCodigo = resultado.getString("DPI");
+                System.out.println(comprobadorCodigo);
+                if(comprobadorCodigo.equalsIgnoreCase("")==false || comprobadorCodigo!=null){
+                    return comprobadorCodigo;
+                }
+            }
+            
+            comando = "SELECT DPI FROM CAJERO WHERE NoUsuario=(?)";
+            statement = connection.prepareStatement(comando);
+            statement.setString(1, codigo);
+             resultado = statement.executeQuery();
+            if(resultado.next()){
+                comprobadorCodigo = resultado.getString("DPI");
+                if(comprobadorCodigo.equalsIgnoreCase("")==false || comprobadorCodigo!=null){
+                    return comprobadorCodigo;
+                }
+            }
+            
+            
+        } catch (SQLException ex) {
+               new Conexion().CloseConnection();
+               ex.printStackTrace();               
+        }   
+        return null;
+    }
 }

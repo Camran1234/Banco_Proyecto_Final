@@ -34,11 +34,11 @@ public class ParserEmpleado {
             throw new FormatException (" El turno no es Matutino o Vespertino");
         }
         try{
-            if(elementoXml.getElementsByTagName("DPI").item(0).getTextContent().length()==15){
+            if(elementoXml.getElementsByTagName("DPI").item(0).getTextContent().length()==13){
                 Long.parseLong(elementoXml.getElementsByTagName("DPI").item(0).getTextContent());
                 dpi = elementoXml.getElementsByTagName("DPI").item(0).getTextContent();
             }else{
-                throw new FormatException (" El dpi no contiene 15 digitos");
+                throw new FormatException (" El dpi no contiene 13 digitos");
             }
         }catch(Exception ex){
             throw new FormatException ("El dpi no es un numero" + ex.getMessage());

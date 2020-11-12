@@ -31,7 +31,7 @@ public class ParserCliente {
     private ArrayList<String> fechaCreacion = new ArrayList<>();
     private ArrayList<String> creditos = new ArrayList<>();
     
-    /**
+    /** 
      * Obtiene los elementos del gerente
      * @param elementoXml
      * @return
@@ -40,11 +40,11 @@ public class ParserCliente {
         codigo = elementoXml.getElementsByTagName("CODIGO").item(0).getTextContent();
         nombre = elementoXml.getElementsByTagName("NOMBRE").item(0).getTextContent();
         try{
-            if(elementoXml.getElementsByTagName("DPI").item(0).getTextContent().length()==15){
+            if(elementoXml.getElementsByTagName("DPI").item(0).getTextContent().length()==13){
                 Long.parseLong(elementoXml.getElementsByTagName("DPI").item(0).getTextContent());
                 dpi = elementoXml.getElementsByTagName("DPI").item(0).getTextContent();
             }else{
-                throw new FormatException (" El dpi no contiene 15 digitos ");
+                throw new FormatException (" El dpi no contiene 13 digitos ");
             }
         }catch(Exception ex){
             throw new FormatException (" El dpi no es un numero ");

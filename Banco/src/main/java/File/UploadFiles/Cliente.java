@@ -44,8 +44,8 @@ public class Cliente extends Usuario{
     }
 
     public Cliente(String nombre, String dpi, String direccion, String sexo, String fecha, String codigoUsuario, String password, String password2, String pathFile) throws FormatException{
-        if(dpi.length()!=15){                        
-            throw new FormatException (" El dpi no contiene 15 digitos ");                
+        if(dpi.length()!=13){                        
+            throw new FormatException (" El dpi no contiene 13 digitos ");                
         }        
         try{                            
             Long.parseLong(dpi);                            

@@ -3,7 +3,7 @@
     Created on : Nov 10, 2020, 11:57:59 PM
     Author     : camran1234
 --%>
-
+<%@page import="File.SpecialOptions.CloseSession"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="SQL.Get.InfoCliente"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -13,10 +13,7 @@
     response.setHeader("Cache-Control","no-store"); //Directs caches not to store the page under any circumstance
     response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale"
     response.setHeader("Pragma","no-cache");
-    if(session.getAttribute("Codigo") == null){
-        response.sendRedirect("./index.jsp");
-        return;
-    }
+    new CloseSession().redirigirSesionCerrada(request, response);
     %>
     <style>
     #nav1{  
@@ -125,7 +122,7 @@
                          </div>
                          <p class="mb-1">DPI: <%= listasDatos.get(1).get(indexDatos)%></p>
                          <p class="mb-1">Codigo: <%= listasDatos.get(2).get(indexDatos)%></p>
-                        <input   name="Codigo" type="submit"  value = "Seleccionar: <%=listasDatos.get(2).get(indexDatos)%>">    
+                         <input   name="Codigo" type="submit"  value = "Seleccionar: <%=listasDatos.get(2).get(indexDatos)%>">    
                     </li>
                <%}%>
                 </ul>

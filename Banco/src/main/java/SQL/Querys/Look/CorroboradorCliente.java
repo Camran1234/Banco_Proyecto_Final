@@ -24,8 +24,8 @@ public class CorroboradorCliente {
             //para devolver un valor que indicara el usuario que esta usando
             //corroboracion para administrador
             
-            if(dpi.length()!=15){                    
-                throw new FormatException (" El dpi no contiene 15 digitos ");    
+            if(dpi.length()!=13){                    
+                throw new FormatException (" El dpi no contiene 13 digitos ");    
             }
             try{                    
                 Long.parseLong(dpi);                

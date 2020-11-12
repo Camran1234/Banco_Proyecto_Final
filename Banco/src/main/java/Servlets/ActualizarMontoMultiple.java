@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
  *
  * @author camran1234
  */
-@WebServlet(name = "ActualizarMontoMultiple", urlPatterns = {"/ActualizarMontoMultiple"})
+@WebServlet("/ActualizarMontoMultiple")
 public class ActualizarMontoMultiple extends HttpServlet {
 
     /**
@@ -39,7 +39,7 @@ public class ActualizarMontoMultiple extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String monto = request.getParameter("monto");
-        String cuenta = request.getParameter("cuenta");
+        String cuenta = request.getParameter("cuentas");
         String mensaje = null;
         try {
                   mensaje = new MontoTransaccion(monto,cuenta).subirArchivo();

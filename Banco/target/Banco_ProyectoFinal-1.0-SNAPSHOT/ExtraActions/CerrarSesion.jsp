@@ -12,5 +12,4 @@
     session.removeAttribute("Password");
     session.invalidate();
     response.sendRedirect("../index.jsp");
-    
 %>

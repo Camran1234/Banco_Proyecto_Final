@@ -3,7 +3,7 @@
     Created on : Nov 10, 2020, 9:28:07 PM
     Author     : camran1234
 --%>
-
+<%@page import="File.SpecialOptions.CloseSession"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
@@ -11,10 +11,7 @@
     response.setHeader("Cache-Control","no-store"); //Directs caches not to store the page under any circumstance
     response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale"
     response.setHeader("Pragma","no-cache");
-    if(session.getAttribute("Codigo") == null){
-        response.sendRedirect("./index.jsp");
-        return;
-    }
+    new CloseSession().redirigirSesionCerrada(request, response);
     %>
     <style>
     #nav1{  

@@ -28,5 +28,11 @@
                 case "GERENTE":
                     response.sendRedirect("../Gerente/InicioGerente.jsp");
                     break;
+                case "CLIENTE":
+                    response.sendRedirect("../Cliente/InicioCliente.jsp");
+                    break;    
+                case "CAJERO":
+                    response.sendRedirect("../Cajero/InicioCajero.jsp");
+                    break;
             }
             %>

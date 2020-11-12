@@ -3,8 +3,8 @@
     Created on : Nov 11, 2020, 8:38:05 AM
     Author     : camran1234
 --%>
-
-<%@page import="SQL.Get.InfoMontos"%>
+<%@page import="File.SpecialOptions.CloseSession"%>
+<%@page import="SQL.Get.InfoMonto"%>
 <%@page import="javax.swing.JOptionPane"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="SQL.Get.InfoCliente"%>
@@ -15,10 +15,7 @@
     response.setHeader("Cache-Control","no-store"); //Directs caches not to store the page under any circumstance
     response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale"
     response.setHeader("Pragma","no-cache");
-    if(session.getAttribute("Codigo") == null){
-        response.sendRedirect("./index.jsp");
-        return;
-    }
+    new CloseSession().redirigirSesionCerrada(request, response);
     %>
     <style>
     #nav1{  
@@ -49,9 +46,9 @@
         transform: translate(-50%, -50%);
     }
     </style>
-    <%  String montoSolitario = new InfoMontos().obtenerMontoSolitario();
-        String montoMultiple = new InfoMontos().obtenerMontoMultiple();
-        String cantidadCuentas = new InfoMontos().obtenerCantidadCuentas();
+    <%  String montoSolitario = new InfoMonto().obtenerMontoSolitario();
+        String montoMultiple = new InfoMonto().obtenerMontoMultiple();
+        String cantidadCuentas = new InfoMonto().obtenerCantidadCuentas();
     %>
     <script>
 function redirigir() {
