@@ -67,7 +67,7 @@
     <%  String mensaje =(String) session.getAttribute("Mensaje");
         session.removeAttribute("Mensaje");
         String cuenta = request.getParameter("Codigo");
-        ArrayList<ArrayList> listasDatos = new InfoAsociacion().InformacionBasica((String) session.getAttribute("Codigo") );
+        ArrayList<ArrayList> listasDatos = new InfoAsociacion().informacionBasica((String) session.getAttribute("Codigo") );
         %>
         
 <script>

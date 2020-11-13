@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,7 +27,7 @@ public class CorroboradorCuentaAsociada {
      * @return
      * @throws FormatException 
      */
-    public String AccountAssociated(String cuentaA, String cuentaB) throws FormatException{
+    public String accountAssociated(String cuentaA, String cuentaB) throws FormatException{
         try {  
             //Comprobaremos en que tabla se encuentra el codigo el usuario
             //para devolver un valor que indicara el usuario que esta usando
@@ -70,11 +71,14 @@ public class CorroboradorCuentaAsociada {
             //corroboracion para administrador
             String mensaje=null;
             Connection connection = new Conexion().CreateConnection();
-            String comando = "SELECT * FROM CUENTAS_ASOCIADAS WHERE IDCuentaA=(?) AND IDCuentaB=(?) AND Estado=\"Pendiente\" OR Estado = \"Aceptar\"";
+            String comando = "SELECT * FROM CUENTAS_ASOCIADAS WHERE IDCuentaA=(?) AND IDCuentaB=(?) AND (Estado=\"Pendiente\" OR Estado = \"Aceptar\")"
+                    + " OR IDCuentaB=? AND IDCuentaB=? AND (Estado=\"Pendiente\" OR Estado = \"Aceptar\")";
             PreparedStatement statement = null;
             statement = connection.prepareStatement(comando);
             statement.setString(1, cuentaA);
             statement.setString(2, cuentaB);
+            statement.setString(3, cuentaA);
+            statement.setString(4, cuentaB);
             ResultSet resultado = statement.executeQuery();
             if(resultado.next()){
                 mensaje = resultado.getString("NoAsociacion");
@@ -82,7 +86,7 @@ public class CorroboradorCuentaAsociada {
                     throw new FormatException("No puedes mandar 2 veces la solicitud de asociacion, a la misma cuenta");
                 }
             }else{
-                throw new FormatException("");
+                return mensaje;
             }
         } catch (SQLException ex) {
                new Conexion().CloseConnection();

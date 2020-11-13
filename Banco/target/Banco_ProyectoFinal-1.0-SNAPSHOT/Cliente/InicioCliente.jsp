@@ -52,7 +52,7 @@
         <div class="card text-white bg-dark mb-3" style="max-width: 30rem;">
                 <div class="card-header">Bienvenido</div>
                 <div class="card-body">
-                    <h5 class="card-title"><%= new CorroboradorUsuario().GetName((String) session.getAttribute("Codigo"))%></h5>
+                    <h5 class="card-title"><%= new CorroboradorUsuario().getName((String) session.getAttribute("Codigo"))%></h5>
                     <p class="card-text">Hoy estamos <%= new Time().getTodayDate()%></p>
                      <h5 class="card-tittle">Datos del Dia de Hoy</h5>
                      <p class="card-text">Límite para Transacciones Individuales: Q<%= infoMonto.obtenerMontoSolitario()%></p>

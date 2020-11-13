@@ -49,8 +49,8 @@ public class ActualizarCajero extends HttpServlet {
         String mensaje = null;
         try {
                   mensaje = new ActualizadorCajero(nombre, dpi, direccion, sexo, turno, codigoUsuario, password, password2).subirArchivo();
-                  String cambios = "Se cambio el nombre por: "+nombre+" Se cambio el dpi por: "+dpi+" Se cambio la direccion por: "+direccion+" Se cambio el sexo por: "+sexo+
-                          "Se cambio el turno por: "+turno+", quien realizo estos cambios fue el ciudadano cuyo dpi es: " + request.getSession().getAttribute("Codigo");
+                  String cambios = "Se actualizo el cajero de codigo "+codigoUsuario + " Se cambio el nombre por: "+nombre+"  Que tiene el numero de dpi: "+dpi+" Se cambio la direccion por: "+direccion+" Se cambio el sexo por: "+sexo+
+                          "Se cambio el turno por: "+turno+", quien realizo estos cambios fue el ciudadano cuyo codigo es: " + request.getSession().getAttribute("Codigo");
                   String dpiGerente = new InfoGerente().obtenerDPIGerente((String)request.getSession().getAttribute("Codigo"));
                   mensaje += " " +new HistorialActualizacion().subirHistorial(cambios, dpiGerente);
                   //Crear historial

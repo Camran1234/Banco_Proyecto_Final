@@ -44,9 +44,10 @@ public class CrearTransaccion extends HttpServlet {
         request.getSession().removeAttribute("Tipo");
         request.getSession().removeAttribute("CodigoCliente");
         request.getSession().removeAttribute("Monto");
+        request.getSession().removeAttribute("Nombre");
         //Creamos 2 transacciones una de acreditar a la cuenta solicitada y otra le quitamos a la cuenta indicada del cleinte
-        Transaccion transaccion = new Transaccion(null, "101", numeroCuentaRetirar, monto, "Credito");
-        Transaccion transaccion1 = new Transaccion(null, "101", numeroCuenta, monto, "Debito");
+        Transaccion transaccion = new Transaccion(null, "101", numeroCuenta, monto, "Credito");
+        Transaccion transaccion1 = new Transaccion(null, "101", numeroCuentaRetirar, monto, "Debito");
         String mensaje = transaccion.subirArchivo();
         transaccion1.subirArchivo();
         request.getSession().setAttribute("Resultado", mensaje);

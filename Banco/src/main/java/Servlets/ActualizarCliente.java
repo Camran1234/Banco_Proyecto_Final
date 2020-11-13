@@ -147,8 +147,8 @@ public class ActualizarCliente extends HttpServlet {
         if(codigoUsuario!=null){
             try {
                   mensaje = new ActualizadorCliente(nombre, dpi,direccion, sexo, fecha, codigoUsuario, password, password2, path).subirArchivo();
-                  String cambios = "Se cambio el nombre por: "+nombre+" Se cambio el dpi por: "+dpi+"Se cambio la direccion por: "+direccion+"Se cambio el sexo por: "+sexo+
-                          "Se cambio la fecha de nacimiento por: "+fecha+", quien realizo estos cambios fue el ciudadano cuyo dpi es: " + request.getSession().getAttribute("Codigo");
+                  String cambios = "Se actualizo el cliente de codigo "+codigoUsuario + "  Que tiene el numero de dpi: "+dpi+"Se cambio la direccion por: "+direccion+"Se cambio el sexo por: "+sexo+
+                          "Se cambio la fecha de nacimiento por: "+fecha+", quien realizo estos cambios fue el ciudadano cuyo codigo es: " + request.getSession().getAttribute("Codigo");
                   String dpiGerente = new InfoGerente().obtenerDPIGerente((String)request.getSession().getAttribute("Codigo"));
                   mensaje += " " +new HistorialActualizacion().subirHistorial(cambios, dpiGerente);
                   //Crear historial

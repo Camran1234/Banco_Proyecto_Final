@@ -112,7 +112,7 @@
           }
     </script>
     <%  InfoCuenta info = new InfoCuenta();
-    ArrayList<ArrayList> listasDatos = info.InformacionBasica( new CorroboradorUsuario().GetDpi((String)session.getAttribute("Codigo")));
+    ArrayList<ArrayList> listasDatos = info.informacionBasica( new CorroboradorUsuario().getDpi((String)session.getAttribute("Codigo")));
     %>
     <html>
     <head>

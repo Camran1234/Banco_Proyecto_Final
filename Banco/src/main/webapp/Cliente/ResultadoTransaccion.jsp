@@ -47,7 +47,7 @@
          <%@ include file = "../Cliente/barraMenuCliente.html" %>
          <br><br><br>
          <br><br><br><br><br><br><br><br><br>
-            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
+            <div class="card text-white bg-dark mb-3" style="max-width: 40rem;">
                     <div class="card-header">Fin de Carga</div>
                     <div class="card-body">
                       <h5 class="card-title">Estado del Usuario:</h5>

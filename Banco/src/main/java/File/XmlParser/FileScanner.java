@@ -31,7 +31,7 @@ public class FileScanner {
      * @param path
      * @return 
      */
-    public String ScannFile(String path){
+    public String scannFile(String path){
         XMLParser xmlParser = new XMLParser();
         xmlParser.parsePathToNodes(path);
         listasXML = xmlParser.GetElements();
@@ -104,19 +104,19 @@ public class FileScanner {
         return null;
     }
     
-    public ArrayList<String> ObtenerMensajes(){
+    public ArrayList<String> obtenerMensajes(){
         return  mensajes;
     }
     
-    public ArrayList<String> ObtenerMensajesErroneos(){
+    public ArrayList<String> obtenerMensajesErroneos(){
         return  mensajeErrores;
     }
     
-    public ArrayList<String> ObtenerNodos(){
+    public ArrayList<String> obtenerNodos(){
         return  nodoMensaje;
     }
     
-    public ArrayList<String> ObtenerNodosErroneos(){
+    public ArrayList<String> obtenerNodosErroneos(){
         return  nodoErrores
 ;    }
 }

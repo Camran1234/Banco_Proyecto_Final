@@ -25,7 +25,7 @@ public class InfoCuenta {
      * @param idCliente
      * @return 
      */
-    public ArrayList<ArrayList> InformacionBasica(String idCliente){
+    public ArrayList<ArrayList> informacionBasica(String idCliente){
         try {  
             //Comprobaremos en que tabla se encuentra el codigo el usuario
             //para devolver un valor que indicara el usuario que esta usando
@@ -59,7 +59,7 @@ public class InfoCuenta {
      * @param codigo
      * @return 
      */
-    public ArrayList<String> InformacionCompleta(String codigo){
+    public ArrayList<String> informacionCompleta(String codigo){
         try {  
             //Comprobaremos en que tabla se encuentra el codigo el usuario
             //para devolver un valor que indicara el usuario que esta usando
@@ -85,82 +85,14 @@ public class InfoCuenta {
         
     }
     
-    /**
-     * Comprueba si el codigo enviado existe en la base de datos
-     * @param numeroCuenta
-     * @return 
-     */
-    public Boolean checkIfCodeExists(String numeroCuenta){
-        try {  
-            //Comprobaremos en que tabla se encuentra el codigo el usuario
-            //para devolver un valor que indicara el usuario que esta usando
-            //corroboracion para administrador
-            String cuentaComprobada = "";
-            Connection connection = new Conexion().CreateConnection();
-            String comando = "SELECT * FROM CUENTA WHERE Codigo=?";
-            PreparedStatement statement = null;
-            statement = connection.prepareStatement(comando);
-            statement.setString(1, numeroCuenta);
-            ResultSet resultado = statement.executeQuery();
-            if(resultado.next()){
-                cuentaComprobada = resultado.getString("Codigo");
-            }
-            new Conexion().CloseConnection();
-            if(cuentaComprobada.equalsIgnoreCase(numeroCuenta)){
-                return true;
-            }
-            return false;
-        } catch (SQLException ex) {
-               new Conexion().CloseConnection();
-               ex.printStackTrace();               
-        }
-        return false;
-    }
-    
-    /**
-     * Comprueba si la cuenta enviada tiene los suficientes fondos
-     * @param numeroCuenta
-     * @param monto
-     * @param cliente
-     * @return 
-     */
-    public String checkIfEnoughFounds(String numeroCuenta, String monto, String cliente){
-        try {  
-            //Comprobaremos en que tabla se encuentra el codigo el usuario
-            //para devolver un valor que indicara el usuario que esta usando
-            //corroboracion para administrador
-            String dinero = null;
-            Connection connection = new Conexion().CreateConnection();
-            String comando = "SELECT Credito FROM CUENTA WHERE CODIGO=? AND IDCliente=?";
-            PreparedStatement statement = null;
-            statement = connection.prepareStatement(comando);
-            statement.setString(1, numeroCuenta);
-            statement.setString(2, cliente);
-            ResultSet resultado = statement.executeQuery();
-            if(resultado.next()){
-                dinero = resultado.getString("Credito");
-            }
-            new Conexion().CloseConnection();
-            if(dinero==null){
-                return "La cuenta dada no le pertenece";
-            }
-            if(Double.parseDouble(monto)>Double.parseDouble(dinero)){
-                return "El dinero de la cuenta no soporta el monto establecido de: Q"+monto+ " se tiene: Q"+dinero;
-            }
-            return "SI";
-        } catch (SQLException ex) {
-               new Conexion().CloseConnection();
-               ex.printStackTrace();               
-        }
-        return "ERROR FATAL";
-    }
+   
     
     /**
      * Retorna el nombre del propietario de la cuenta indicada
      * @param numeroCuenta
      * @return 
      */
-    public String GetNameOfCode(String numeroCuenta){
+    public String getNameOfCode(String numeroCuenta){
         try {  
             //Comprobaremos en que tabla se encuentra el codigo el usuario
             //para devolver un valor que indicara el usuario que esta usando
@@ -174,6 +106,35 @@ public class InfoCuenta {
             ResultSet resultado = statement.executeQuery();
             if(resultado.next()){
                 nombre = resultado.getString("Nombre");
+            }
+            new Conexion().CloseConnection();
+            return nombre;
+        } catch (SQLException ex) {
+               new Conexion().CloseConnection();
+               ex.printStackTrace();               
+        }
+        return null;
+    }
+    
+    /**
+     * Retorna el nombre del propietario de la cuenta indicada
+     * @param numeroCuenta
+     * @return 
+     */
+    public String getDpiOfAccountCode(String numeroCuenta) {
+        try {  
+            //Comprobaremos en que tabla se encuentra el codigo el usuario
+            //para devolver un valor que indicara el usuario que esta usando
+            //corroboracion para administrador
+            String nombre = null;
+            Connection connection = new Conexion().CreateConnection();
+            String comando = "SELECT IDCliente FROM CUENTA WHERE Codigo=?";
+            PreparedStatement statement = null;
+            statement = connection.prepareStatement(comando);
+            statement.setString(1, numeroCuenta);
+            ResultSet resultado = statement.executeQuery();
+            if(resultado.next()){
+                nombre = resultado.getString("IDCliente");
             }
             new Conexion().CloseConnection();
             return nombre;

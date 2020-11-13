@@ -4,6 +4,8 @@
     Author     : camran1234
 --%>
 
+<%@page import="SQL.Get.InfoCuenta"%>
+<%@page import="SQL.Querys.Look.CorroboradorCuenta"%>
 <%@page import="File.SpecialOptions.CloseSession"%>
 <%  response.setHeader("Cache-Control","no-cache"); //Forces caches to obtain a new copy of the page from the origin server
     response.setHeader("Cache-Control","no-store"); //Directs caches not to store the page under any circumstance
@@ -11,19 +13,11 @@
     response.setHeader("Pragma","no-cache");
     new CloseSession().redirigirSesionCerrada(request, response);
     //Obtenemos los valores enviados desde el servlet
-    String nombreReceptor = (String)request.getAttribute("Nombre");
-    String cuentaEmisora = (String)request.getAttribute("cuentaEmisora");
-    String cuentaReceptora = (String)request.getAttribute("cuentaReceptora");
-    String tipoTransaccion = (String)request.getAttribute("tipoTransaccion");
-    String cantidad = (String)request.getAttribute("deposito");
-    //Removemos los atributos
-    request.removeAttribute("Nombre");
-    request.removeAttribute("cuentaEmisora");
-    request.removeAttribute("cuentaReceptora");
-    request.removeAttribute("tipoTransaccion");
-    request.removeAttribute("deposito");
-    
 
+    String nombreReceptor = (String) session.getAttribute("Nombre");
+    String cuentaReceptora = (String) session.getAttribute("cuentaReceptora");
+    String tipoTransaccion = (String) session.getAttribute("tipoTransaccion");
+    String cantidad = (String) session.getAttribute("deposito");
     %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -32,7 +26,7 @@
         opacity: 0.8;     
     }
     body{
-        background-image: url("../resources/Cliente.jpg");
+        background-image: url("../resources/Cajero.jpg");
     }
     .card {
         margin: 0 auto; /* Added */
@@ -52,7 +46,7 @@
     </style>
     <script>
 function redirigir() {
-    location.replace("../Cliente/BancaVirtual.jsp");
+    location.replace("../Cajero/Depositos.jsp");
 }
 </script>
 <html>
@@ -62,17 +56,16 @@ function redirigir() {
         <title>Aceptar/Transaccion</title>
     </head>    
     <body>
-         <%@ include file = "../Cliente/barraMenuCliente.html" %>
+         <%@ include file = "../Cajero/barraMenuCajero.html" %>
          <br><br><br>
-         <form method="post" action="../CrearTransaccion">
+         <form method="post" action="../CrearDeposito">
             <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
                     <div class="card-header">Comprobación:</div>
                     <div class="card-body">
                       <h5 class="card-title">Datos de la Cuenta:</h5>
                       <p class="card-text">Nombre: <%=nombreReceptor%></p>
                       <p class="card-text">Número de la Cuenta a Depositar: <%=cuentaReceptora%></p>
-                      <p class="card-text">De Parte de la Cuenta: <%=cuentaEmisora%></p>
-                      <p class="card-text">Cantidad a Depositar: <%=cantidad%></p>
+                      <p class="card-text">Cantidad a Mover: <%=cantidad%></p>
                       <p class="card-text">Tipo Transaccion: <%=tipoTransaccion%></p>
                       <div class="form-group align-center">
                               <input class="btn btn-success btn-lg btn-block" name="Codigo" type="submit"  value = "Crear Transacción">       

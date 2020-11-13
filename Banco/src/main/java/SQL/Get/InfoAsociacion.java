@@ -23,7 +23,7 @@ public class InfoAsociacion {
      * El IDCuentaA representa la cuenta a quien se le envio, el IDCuentaB representa quien la envio
      * @return 
      */
-    public ArrayList<ArrayList> InformacionBasica(String codigo){
+    public ArrayList<ArrayList> informacionBasica(String codigo){
         try {  
             ArrayList<ArrayList> array = new ArrayList<>();
             ArrayList<String> nombre = new ArrayList<>();

@@ -65,27 +65,28 @@ function mensaje() {
                     <div  class="card">
                         <div class="card-body">
                             <div class="card-title">
-                                <h2 class="text-center">Realizar Transaccion</h2>
+                                <h2 class="text-center">Realizar Deposito</h2>
                             </div>
                             <hr>
                             
-                            <form action="../Cliente/AceptarDeposito.jsp" method="post" >
+                            <form method="post" action="../ManejarDatosTransaccionCajero">
                                 
                                 <div class="form-group ">
                                     <label>Numero de Cuenta a Depositar</label>
                                     <input name="cuentaReceptora" type="text" class="form-control" value= "" required/>
-                                </div>
-                                
-                                <div class="form-group ">
-                                    <label>Numero de Cuenta del Solicitante</label>
-                                    <input name="cuentaEmisora" type="text" class="form-control" value= "" required/>
-                                </div>
-                                
+                                </div>                                
                                 <div class="form-group ">
                                     <label>Cantidad a Depositar</label>
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Q</span>
                                         <input name="deposito" type="text" value= "" class="form-control" placeholder="Ingrese la cantidad a depositar..." required/>        
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group ">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1">Tipo</span>
+                                        <input name="tipoTransaccion" type="text" value= "Credito" class="form-control" placeholder="Ingrese la cantidad a depositar..." required readonly/>        
                                     </div>
                                 </div>
                                 

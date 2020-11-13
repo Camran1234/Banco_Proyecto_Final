@@ -41,7 +41,7 @@
         <div class="card text-white bg-dark mb-3" style="max-width: 18rem;">
                 <div class="card-header">Bienvenido</div>
                 <div class="card-body">
-                  <h5 class="card-title"><%= new CorroboradorUsuario().GetName((String) session.getAttribute("Codigo"))%></h5>
+                  <h5 class="card-title"><%= new CorroboradorUsuario().getName((String) session.getAttribute("Codigo"))%></h5>
                   <p class="card-text">Hoy estamos <%= new Time().getTodayDate()%></p>
                 </div>
         </div>

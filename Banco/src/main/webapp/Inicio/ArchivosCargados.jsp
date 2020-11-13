@@ -10,11 +10,11 @@
 <!DOCTYPE html>
 <%  FileScanner fileScanner = new FileScanner();
     String path =(String) session.getAttribute("urlArchivo");
-    fileScanner.ScannFile(path);
-    ArrayList<String> mensaje = fileScanner.ObtenerMensajes();
-    ArrayList<String> mensajesErroneos = fileScanner.ObtenerMensajesErroneos();
-    ArrayList<String> nodos = fileScanner.ObtenerNodos();
-    ArrayList<String> nodosErrores = fileScanner.ObtenerNodosErroneos();
+    fileScanner.scannFile(path);
+    ArrayList<String> mensaje = fileScanner.obtenerMensajes();
+    ArrayList<String> mensajesErroneos = fileScanner.obtenerMensajesErroneos();
+    ArrayList<String> nodos = fileScanner.obtenerNodos();
+    ArrayList<String> nodosErrores = fileScanner.obtenerNodosErroneos();
     %>
 <style>
     .etiqueta{

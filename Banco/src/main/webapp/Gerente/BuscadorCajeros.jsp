@@ -75,7 +75,7 @@
         }
     </style>
 <%  InfoCajero info = new InfoCajero();
-    ArrayList<ArrayList> listasDatos = info.InformacionBasica();
+    ArrayList<ArrayList> listasDatos = info.informacionBasica();
     %>
     
     <script>

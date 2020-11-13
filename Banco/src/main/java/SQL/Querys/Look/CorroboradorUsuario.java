@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  * @author camran1234
  */
 public class CorroboradorUsuario {
-    public String CheckLogIn(String codigo, String password){
+    public String checkLogIn(String codigo, String password){
         
         try {  
             //Comprobaremos en que tabla se encuentra el codigo el usuario
@@ -46,7 +46,12 @@ public class CorroboradorUsuario {
         return null;
     }
     
-    public String GetName(String codigo){
+    /**
+     * Obtiene un nombre en base al codigo de usuario
+     * @param codigo
+     * @return 
+     */
+    public String getName(String codigo){
         try {  
             //Comprobaremos en que tabla se encuentra el codigo el usuario
             //para devolver un valor que indicara el usuario que esta usando
@@ -99,7 +104,12 @@ public class CorroboradorUsuario {
         return null;
     }
     
-    public String GetDpi(String codigo){
+    /**
+     * Obtiene un dpi en base a un codigo de usuario
+     * @param codigo
+     * @return 
+     */
+    public String getDpi(String codigo){
         try {  
             //Comprobaremos en que tabla se encuentra el codigo el usuario
             //para devolver un valor que indicara el usuario que esta usando

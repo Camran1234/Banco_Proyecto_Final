@@ -12,7 +12,7 @@
     String password = request.getParameter("Password");
     CorroboradorUsuario corroborador = new CorroboradorUsuario();
     String tipo ="";
-    tipo = corroborador.CheckLogIn(codigo, password);
+    tipo = corroborador.checkLogIn(codigo, password);
     if( tipo == null || tipo.equalsIgnoreCase("null")){
         session.setAttribute("Mensaje", "Codigo o Contraseña Incorrectos");
         response.sendRedirect("../index.jsp");

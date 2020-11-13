@@ -73,7 +73,7 @@
         }
     </style>
 <%  InfoCliente info = new InfoCliente();
-    ArrayList<ArrayList> listasDatos = info.InformacionBasica();
+    ArrayList<ArrayList> listasDatos = info.informacionBasica();
     %>
     
     <script>

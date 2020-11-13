@@ -4,6 +4,7 @@
     Author     : camran1234
 --%>
 
+<%@page import="SQL.Querys.Look.CorroboradorCuenta"%>
 <%@page import="File.SpecialOptions.CloseSession"%>
 <%@page import="File.ErrorHandlers.FormatException"%>
 <%@page import="SQL.Querys.Look.CorroboradorCuentaAsociada"%>
@@ -18,64 +19,14 @@
     response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale"
     response.setHeader("Pragma","no-cache");
     new CloseSession().redirigirSesionCerrada(request, response);
-    InfoCuenta info = new InfoCuenta();
-    String numeroCuenta = request.getParameter("codigoCuenta");
-    String numeroCuentaCliente = request.getParameter("codigoCuentaRetirar");
-    String cliente = (String)session.getAttribute("Codigo");
-    String monto = request.getParameter("monto");
-    request.removeAttribute("codigoCuenta");
-    request.removeAttribute("monto");
-    //Corroboramos que sea un numero
-    try {
-        Double.parseDouble(monto);
-        } catch (Exception e) {
-            request.getSession().setAttribute("Mensaje", "El monto establecido no es un numero");
-            request.setAttribute("cuenta", numeroCuenta);
-            request.setAttribute("dinero", monto);    
-            response.sendRedirect("../Cliente/BancaVirtual.jsp");
-            return;
-        }
-    //Corroboramos que no sea un numero negativo
-    if(Double.parseDouble(monto)<0){
-        request.getSession().setAttribute("Mensaje", "El monto establecido no puede ser negativo");
-        request.setAttribute("cuenta", numeroCuenta);    
-        request.setAttribute("dinero", monto);
-        response.sendRedirect("../Cliente/BancaVirtual.jsp");
-        return;
-    }
-    //Corroboramos que los codigos indicados existan
-    if(info.checkIfCodeExists(numeroCuenta)==false){
-        request.getSession().setAttribute("Mensaje", "No se encontro el numero de cuenta");
-        response.sendRedirect("../Cliente/BancaVirtual.jsp");
-        return;
-    }
-    //Obtenemos el nombre del propietario de la cueta
-    String nombre = new InfoCuenta().GetNameOfCode(numeroCuenta);
-    String resultado = new InfoCuenta().checkIfEnoughFounds(numeroCuentaCliente, monto,new CorroboradorUsuario().GetDpi(cliente));
-    String tipo = "Credito";
-    if(!resultado.equalsIgnoreCase("SI")){
-        request.getSession().setAttribute("Mensaje", resultado);
-        response.sendRedirect("../Cliente/BancaVirtual.jsp");
-        return;
-    }
-    try {
-        resultado =  new CorroboradorCuentaAsociada().AccountAssociated(numeroCuenta, numeroCuentaCliente);
-        } catch (FormatException e) {
-            request.getSession().setAttribute("Mensaje", e.getMessage());
-            response.sendRedirect("../Cliente/BancaVirtual.jsp");
-            return;
-        }
+
+    //Declaramos los valores
+    String nombre = (String) session.getAttribute("Nombre");
+    String numeroCuenta= (String) session.getAttribute("NumeroCuenta");
+    String numeroCuentaCliente= (String) session.getAttribute("NumeroCuentaRetirar");
+    String monto= (String) session.getAttribute("Monto");
+    String tipo= (String) session.getAttribute("Tipo");
     
-    if(!resultado.equalsIgnoreCase("SI")){
-        request.getSession().setAttribute("Mensaje", resultado);
-        response.sendRedirect("../Cliente/BancaVirtual.jsp");
-        return;
-    }
-    session.setAttribute("Tipo", tipo);
-    session.setAttribute("NumeroCuenta", numeroCuenta);
-    session.setAttribute("NumeroCuentaRetirar", numeroCuentaCliente);
-    session.setAttribute("CodigoCliente", cliente);
-    session.setAttribute("Monto", monto);
     %>
     <style>
     #nav1{  

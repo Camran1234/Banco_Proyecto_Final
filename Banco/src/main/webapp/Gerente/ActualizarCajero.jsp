@@ -51,7 +51,7 @@
         ArrayList<String> datos=null;
         if(codigo!=null){
             codigo = codigo.split(" ")[1];
-             datos = new InfoCajero().InformacionCompleta(codigo);
+             datos = new InfoCajero().informacionCompleta(codigo);
         }
         request.removeAttribute("Codigo");
     %>

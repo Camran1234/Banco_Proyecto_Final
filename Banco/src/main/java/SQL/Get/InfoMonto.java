@@ -17,8 +17,34 @@ import java.util.ArrayList;
  * @author camran1234
  */
 public class InfoMonto {
-    
-    
+    public ArrayList<ArrayList> informacionBasica(String idCliente){
+        try {  
+            //Comprobaremos en que tabla se encuentra el codigo el usuario
+            //para devolver un valor que indicara el usuario que esta usando
+            //corroboracion para administrador
+            ArrayList<ArrayList> array = new ArrayList<>();
+            ArrayList<String> codigo = new ArrayList<>();
+            ArrayList<String> credito = new ArrayList<>();
+            Connection connection = new Conexion().CreateConnection();
+            String comando = "SELECT * FROM CUENTA WHERE IDCliente=? ORDER BY DPI";
+            PreparedStatement statement = null;
+            statement = connection.prepareStatement(comando);
+            statement.setString(1, idCliente);
+            ResultSet resultado = statement.executeQuery();
+            while(resultado.next()){
+                codigo.add(resultado.getString("Codigo"));
+                credito.add(resultado.getString("Credito"));
+            }
+            array.add(codigo);               
+            array.add(credito);            
+            new Conexion().CloseConnection();
+            return array;
+        } catch (SQLException ex) {
+               new Conexion().CloseConnection();
+               ex.printStackTrace();               
+        }   
+        return null;
+    }
     
     
     /**

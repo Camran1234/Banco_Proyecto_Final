@@ -61,6 +61,7 @@ public class Transaccion {
             Connection connection = new Conexion().CreateConnection();
             PreparedStatement statement = null;
             String comando1 = "INSERT INTO TRANSACCION (Codigo, FechaRealizacion, HoraRealizacion, Monto, Tipo, IDCajero, Cuenta) VALUES (?,?,?,?,?,?,?)";
+            //Creamos la transaccion
             if(codigo==null){
                 comando1 = "INSERT INTO TRANSACCION (FechaRealizacion, HoraRealizacion, Monto, Tipo, IDCajero, Cuenta) VALUES (?,?,?,?,?,?)";
                 //Preparamos el statement para subirlo en la base de datos de Cuentas
@@ -84,10 +85,10 @@ public class Transaccion {
                 statement.setString(7, cuenta);
                 statement.executeUpdate();
             }
-            
+            //Actualizamos el dinero de la cuenta
             String comando2 = "UPDATE CUENTA SET Credito=Credito-? WHERE Codigo = ?";
             statement = connection.prepareStatement(comando2);
-            if(tipo.equalsIgnoreCase("Credito")){
+            if(tipo.equalsIgnoreCase("Debito")){
                 statement.setDouble(1, Double.parseDouble(monto));
             }else{
                 statement.setDouble(1, Double.parseDouble(monto)*-1);
@@ -112,7 +113,7 @@ public class Transaccion {
             }
             
             new Conexion().CloseConnection();
-            return " Transaccion "+codigo+" de "+tipo+" con monto Q" + monto+" realizada correctamente";    
+            return " Transaccion "+codigo+" de "+tipo+" con monto Q" + monto+" dirigida hacia la cuenta "+cuenta+" realizada correctamente";    
                 //Solo copiar esto a las otras clases colocar la nueva base de datos ya modificaa, y de ultimo se agrega todas las clases restantes
                 //de lista, se hace la interfaz de empleado y cliente y alli estaria
         } catch (Exception e) {

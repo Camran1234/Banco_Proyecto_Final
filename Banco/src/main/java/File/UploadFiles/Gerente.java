@@ -32,6 +32,27 @@ public class Gerente extends Usuario{
         direccion = parser.returnDireccion();
     }
     
+    public Gerente(String nombre, String dpi, String direccion, String sexo, String turno, String codigoUsuario, String password, String password2) throws FormatException {
+        if(dpi.length()!=13){                        
+            throw new FormatException (" El dpi no contiene 13 digitos ");                
+        }        
+        try{                            
+            Long.parseLong(dpi);                            
+        }catch(Exception ex){        
+            throw new FormatException (" El dpi no es un numero ");            
+        }
+        if(!password.equals(password2)){
+            throw new FormatException ("Las contraseñas no coinciden");
+        }
+        this.codigo = codigoUsuario;
+        this.nombre = nombre;
+        this.password = password;
+        this.sexo = sexo;
+        this.dpi = dpi;
+        this.direccion = direccion;
+        this.turno = turno;
+    }
+    
     @Override
     public String subirArchivo(){
         try {

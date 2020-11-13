@@ -22,7 +22,7 @@ public class InfoCliente {
      * Funcion que devuelve una lista que contiene las lista de los nombre con los dpi y con los codigos de usuario
      * @return 
      */
-    public ArrayList<ArrayList> InformacionBasica(){
+    public ArrayList<ArrayList> informacionBasica(){
         
         
         try {  
@@ -60,7 +60,7 @@ public class InfoCliente {
      * @param codigo
      * @return 
      */
-    public ArrayList<String> InformacionCompleta(String codigo){
+    public ArrayList<String> informacionCompleta(String codigo){
         try {  
             //Comprobaremos en que tabla se encuentra el codigo el usuario
             //para devolver un valor que indicara el usuario que esta usando

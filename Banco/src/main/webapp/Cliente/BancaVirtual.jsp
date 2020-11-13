@@ -76,7 +76,7 @@ function redirigir() {
                                 <h2 class="text-center">Realizar Transaccion</h2>
                             </div>
                             <hr>
-                            <form action="../Cliente/AceptarDeposito.jsp" method="post" >
+                            <form action="../ManejarDatosTransaccionVirtual" method="post" >
                                 <div class="form-group ">
                                     <label>Numero de Cuenta a Depositar</label>
                                     <input name="codigoCuenta" type="text" class="form-control" value= ""required/>

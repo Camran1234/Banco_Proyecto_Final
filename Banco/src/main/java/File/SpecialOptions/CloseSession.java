@@ -20,7 +20,8 @@ public class CloseSession {
     
     
     /**
-     * Comprueba si no esta cerrada la sesion y si el codigo de la sesion es nulo entonces lo cierra
+     * Comprueba si no esta cerrada la sesion y si el codigo de la sesion es nulo entonces lo redirige
+     * al menu principal
      * @param request
      * @param response 
      */

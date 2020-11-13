@@ -50,7 +50,7 @@
     <%  String codigo =(String) session.getAttribute("Codigo");
         ArrayList<String> datos=null;
         if(codigo!=null){
-             datos = new InfoGerente().InformacionCompleta(codigo);
+             datos = new InfoGerente().informacionCompleta(codigo);
         }
     %>
     <script>

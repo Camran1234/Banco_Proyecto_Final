@@ -38,6 +38,7 @@ public class EnviarSolicitud extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
         String cuentaSocio = request.getParameter("cuentaSocio");
         String nombre  = request.getParameter("nombre");
         String dpi  = request.getParameter("dpi");
@@ -47,7 +48,7 @@ public class EnviarSolicitud extends HttpServlet {
         
         try {
             CorroboradorCuentaAsociada corroboradorCuenta = new CorroboradorCuentaAsociada();
-            corroboradorCuenta.checkForRepeated(cuenta, cuenta);
+            corroboradorCuenta.checkForRepeated(cuentaSocio, cuenta);
         } catch (Exception e) {
             request.getSession().setAttribute("Mensaje", e.getMessage());
             response.sendRedirect("./Cliente/ControlCuentas.jsp");     
@@ -57,7 +58,7 @@ public class EnviarSolicitud extends HttpServlet {
         try {
             mensaje = corroborador.checkCorrectData(cuentaSocio, nombre, dpi);
             AsociacionCuenta asociar = new AsociacionCuenta(cuentaSocio, cuenta);
-            mensaje += " y " + asociar.subirArchivo() + " a "+nombre;
+            mensaje += " y " + asociar.subirArchivo();
             request.getSession().setAttribute("Resultado", mensaje);
             response.sendRedirect("./Cliente/ResultadoTransaccion.jsp");
             return;

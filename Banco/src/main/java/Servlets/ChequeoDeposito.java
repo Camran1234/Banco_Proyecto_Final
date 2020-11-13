@@ -45,7 +45,7 @@ public class ChequeoDeposito extends HttpServlet {
             response.sendRedirect("../Cajero/Depositos.jsp");
             return;
         }
-        String nombreReceptor = new InfoCuenta().GetNameOfCode(cuentaReceptora);
+        String nombreReceptor = new InfoCuenta().getNameOfCode(cuentaReceptora);
         String tipoTransaccion = "Credito";
         request.setAttribute("Nombre", nombreReceptor);
         request.setAttribute("tipoTransaccion", tipoTransaccion);

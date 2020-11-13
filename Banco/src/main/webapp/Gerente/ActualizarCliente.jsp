@@ -50,7 +50,7 @@
         ArrayList<String> datos=null;
         if(codigo!=null){
             codigo = codigo.split(" ")[1];
-             datos = new InfoCliente().InformacionCompleta(codigo);
+             datos = new InfoCliente().informacionCompleta(codigo);
         }
         request.removeAttribute("Codigo");
     %>
