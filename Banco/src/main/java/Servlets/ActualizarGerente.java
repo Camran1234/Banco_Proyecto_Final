@@ -52,7 +52,7 @@ public class ActualizarGerente extends HttpServlet {
                   String cambios = "Se actualizo el gerente de codigo "+codigoUsuario + "Se cambio el nombre por: "+nombre+" Que tiene el numero de dpi: "+dpi+" Se cambio la direccion por: "+direccion+" Se cambio el sexo por: "+sexo+
                           "Se cambio el turno por: "+turno+", quien realizo estos cambios fue el ciudadano cuyo codigo es: " + request.getSession().getAttribute("Codigo");
                   String dpiGerente = new InfoGerente().obtenerDPIGerente((String)request.getSession().getAttribute("Codigo"));
-                  mensaje += " " +new HistorialActualizacion().subirHistorial(cambios, dpiGerente);
+                  mensaje += " " +new HistorialActualizacion().subirHistorial(cambios, dpiGerente, codigoUsuario);
                   //Crear historial
             
         } catch (FormatException ex) {

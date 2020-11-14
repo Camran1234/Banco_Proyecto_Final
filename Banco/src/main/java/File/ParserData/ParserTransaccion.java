@@ -14,7 +14,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- *
+ *Enfocado en el manejo de errores que se puedan detectar
+ * en el nodo
  * @author camran1234
  */
 public class ParserTransaccion {

@@ -72,7 +72,7 @@ public class CorroboradorCuentaAsociada {
             String mensaje=null;
             Connection connection = new Conexion().CreateConnection();
             String comando = "SELECT * FROM CUENTAS_ASOCIADAS WHERE IDCuentaA=(?) AND IDCuentaB=(?) AND (Estado=\"Pendiente\" OR Estado = \"Aceptar\")"
-                    + " OR IDCuentaB=? AND IDCuentaB=? AND (Estado=\"Pendiente\" OR Estado = \"Aceptar\")";
+                    + " OR IDCuentaB=? AND IDCuentaA=? AND (Estado=\"Pendiente\" OR Estado = \"Aceptar\")";
             PreparedStatement statement = null;
             statement = connection.prepareStatement(comando);
             statement.setString(1, cuentaA);

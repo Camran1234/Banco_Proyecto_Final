@@ -5,6 +5,7 @@
  */
 package File.SpecialOptions;
 
+import SQL.Querys.Look.CorroboradorUsuario;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpSession;
  * @author camran1234
  */
 public class CloseSession {
-    
+    private Time time = new Time();
     
     /**
      * Comprueba si no esta cerrada la sesion y si el codigo de la sesion es nulo entonces lo redirige
@@ -32,7 +33,21 @@ public class CloseSession {
             } catch (IOException ex) {
                 Logger.getLogger(CloseSession.class.getName()).log(Level.SEVERE, null, ex);
             }
-           
         }
     }
+    
+    /**
+     * Comprueba el turno y verifica si puede estar aqui en este turno de lo contrario redirigira al login
+     * @param request
+     * @param response 
+     */
+    public Boolean redirigirFueraDelTurno(HttpServletRequest request, HttpServletResponse response){
+        String turno = new CorroboradorUsuario().getTurno( (String) request.getSession().getAttribute("Codigo"));
+        if( request.getSession().getAttribute("Codigo").toString().equalsIgnoreCase("101")){
+            return false;
+        }
+        return time.comprobarTurno(turno);
+    }
+    
+    
 }

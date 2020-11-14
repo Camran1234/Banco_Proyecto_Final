@@ -14,6 +14,11 @@
     response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale"
     response.setHeader("Pragma","no-cache");
     new CloseSession().redirigirSesionCerrada(request, response);
+    String pagina = request.getParameter("redireccion");
+    String url = "../Gerente/ActualizarCliente.jsp";
+    if(pagina!=null){
+        url = pagina;
+    }
     %>
     <style>
     #nav1{  
@@ -110,7 +115,7 @@
          <label id="formsText">Seleccionar Cliente</label><br>
          <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Buscar por Nombre...">
          <br><br>
-         <form method="post" action="../Gerente/ActualizarCliente.jsp">
+         <form method="post" action="<%=url%>">
             <div class="list-group">
                 <ul id="UL">
                <%for(int indexDatos=0; indexDatos<listasDatos.get(0).size(); indexDatos++ ){

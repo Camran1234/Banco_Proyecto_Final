@@ -56,6 +56,7 @@ public class Conexion {
             if (connection != null) {
                 try {
                     connection.close();
+                    System.out.println("Coneccion Cerrada");
                 } catch (SQLException ex) {
                     //trow Exception
                 }

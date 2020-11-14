@@ -13,6 +13,9 @@
     response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale"
     response.setHeader("Pragma","no-cache");
     new CloseSession().redirigirSesionCerrada(request, response);
+    if(! new CloseSession().redirigirFueraDelTurno(request, response)){
+        response.sendRedirect("../Gerente/InicioGerente.jsp");
+    }
     %>
     <style>
     #nav1{  

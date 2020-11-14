@@ -107,7 +107,6 @@ public class InfoCuenta {
             if(resultado.next()){
                 nombre = resultado.getString("Nombre");
             }
-            new Conexion().CloseConnection();
             return nombre;
         } catch (SQLException ex) {
                new Conexion().CloseConnection();
@@ -116,6 +115,7 @@ public class InfoCuenta {
         return null;
     }
     
+    
     /**
      * Retorna el nombre del propietario de la cuenta indicada
      * @param numeroCuenta
@@ -123,9 +123,7 @@ public class InfoCuenta {
      */
     public String getDpiOfAccountCode(String numeroCuenta) {
         try {  
-            //Comprobaremos en que tabla se encuentra el codigo el usuario
-            //para devolver un valor que indicara el usuario que esta usando
-            //corroboracion para administrador
+            //Seleccionamos el IDCliente de la cuenta que es el dpi del cliente
             String nombre = null;
             Connection connection = new Conexion().CreateConnection();
             String comando = "SELECT IDCliente FROM CUENTA WHERE Codigo=?";

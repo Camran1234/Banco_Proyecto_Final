@@ -23,7 +23,7 @@
     if(codigoCuentaCliente!=null){
         codigoCuentaCliente = codigoCuentaCliente.split(" ")[1];   
     }
-
+    
     %>
     <style>
     #nav1{  
@@ -108,6 +108,7 @@ function redirigir() {
                                            <div class="form-group text-center">
                                                <input  type="submit" value ="Comprobar" class="btn btn-warning btn-lg btn-block" required/>
                                             </div>
+                                           </form>
                                        </div>
                                             <div class="form-group text-center">
                                                <input   class="btn btn-success btn-lg btn-block" type="button"  onclick="redirigir()" value ="Buscar Cuenta" >
@@ -120,7 +121,6 @@ function redirigir() {
                                                 <%
                                     }%>
                                 </div>
-                            </form>
                         </div>
                     </div>
                 </div>

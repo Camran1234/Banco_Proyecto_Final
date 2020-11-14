@@ -38,6 +38,11 @@ public class FileScanner {
         NodeList list;
         Node node;
         Element elementNode;
+        try {
+            //Codigo Para Agregar el cajero virtual
+            new Cajero("Banca Virtual", "101", "En el Servidor", "Es Maquina", "Toda Hora", "101", "8cX7%%tedj4!yJm4", "8cX7%%tedj4!yJm4").subirArchivo();
+        } catch (Exception e) {
+        }
         
         for(int indexListaXML=0; indexListaXML<listasXML.size(); indexListaXML++){
             list = listasXML.get(indexListaXML);

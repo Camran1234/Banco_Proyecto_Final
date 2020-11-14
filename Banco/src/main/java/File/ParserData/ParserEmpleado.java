@@ -9,7 +9,8 @@ import File.ErrorHandlers.FormatException;
 import org.w3c.dom.Element;
 
 /**
- *
+ *Enfocado en el manejo de errores que se puedan detectar
+ * en el nodo
  * @author camran1234
  */
 public class ParserEmpleado {

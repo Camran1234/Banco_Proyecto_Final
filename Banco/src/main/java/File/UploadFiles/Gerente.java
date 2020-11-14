@@ -8,9 +8,17 @@ package File.UploadFiles;
 import File.ErrorHandlers.FormatException;
 import File.ParserData.ParserEmpleado;
 import SQL.Conexion.Conexion;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import org.w3c.dom.Element;
 
 /**
@@ -30,6 +38,21 @@ public class Gerente extends Usuario{
         dpi = parser.returnDpi();
         turno = parser.returnTurno();
         direccion = parser.returnDireccion();
+        try {
+            this.encryptPassword(password);
+        } catch (InvalidKeyException ex) {
+            Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchPaddingException ex) {
+            Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalBlockSizeException ex) {
+            Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (BadPaddingException ex) {
+            Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public Gerente(String nombre, String dpi, String direccion, String sexo, String turno, String codigoUsuario, String password, String password2) throws FormatException {
@@ -46,11 +69,25 @@ public class Gerente extends Usuario{
         }
         this.codigo = codigoUsuario;
         this.nombre = nombre;
-        this.password = password;
         this.sexo = sexo;
         this.dpi = dpi;
         this.direccion = direccion;
         this.turno = turno;
+        try {
+            this.encryptPassword(password);
+        } catch (InvalidKeyException ex) {
+            Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchPaddingException ex) {
+            Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalBlockSizeException ex) {
+            Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (BadPaddingException ex) {
+            Logger.getLogger(Gerente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @Override

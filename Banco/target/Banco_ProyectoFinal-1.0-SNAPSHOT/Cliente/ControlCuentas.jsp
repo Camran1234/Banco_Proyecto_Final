@@ -21,6 +21,7 @@
     response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale"
     response.setHeader("Pragma","no-cache");
     new CloseSession().redirigirSesionCerrada(request, response);
+    
     %>
     <style>
     #nav1{  
@@ -132,7 +133,7 @@
                     <div class="card-header" >Enviar Solicitud de Asociacion</div>
                         <div class="card-body">
                             <form method="post" action="../Cliente/VerCuentas.jsp"> 
-                                <input  type="submit" name="redireccion" value="Seleccionar Cuenta"  class="btn btn-warning btn-lg btn-lg"  required/>
+                                <button type="submit" name="redireccion" value="../Cliente/ControlCuentas.jsp"  class="btn btn-warning btn-lg btn-lg"  required/>Seleccionar Cuenta</button>
                             </form>
                             <form  method="post" action="../EnviarSolicitud" >
                                 <div class="card-tittle">

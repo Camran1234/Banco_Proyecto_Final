@@ -15,7 +15,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 /**
- *
+ * Enfocado en el manejo de errores que se puedan detectar
+ * en el nodo
  * @author camran1234
  */
 public class ParserCliente {
@@ -63,40 +64,44 @@ public class ParserCliente {
         } catch (Exception e) {
             throw new FormatException (" No se pudo identificar la fecha de nacimiento, debe estar como en el formato siguiente \" 2020-05-17\" o \" 2020/05/17\"");
         }
-        
-        NodeList childNodes = (NodeList) elementoXml.getElementsByTagName("CUENTAS");
-        Element elementosNode = (Element) childNodes.item(0);
-        NodeList childAux = (NodeList) elementosNode.getElementsByTagName("CUENTA");
-        Element elementoAux;
-        
-        String codigoCuenta;
-        String fechaCreada;
-        double credito;
-        for(int indexNodo=0;indexNodo<elementosNode.getElementsByTagName("CUENTA").getLength();indexNodo++){
-                    elementoAux = (Element) childAux.item(indexNodo);
-                    try {
-                        codigoCuenta = elementoAux.getElementsByTagName("CODIGO").item(0).getTextContent();
-                        fechaCreada = elementoAux.getElementsByTagName("CREADA").item(0).getTextContent();
-                        credito = Double.parseDouble(elementoAux.getElementsByTagName("CREDITO").item(0).getTextContent());
-                        if(credito<0){
-                            throw new FormatException ("El credito no puede ser negativo ");
-                        }
-                        try {           
-                            fechaNacimiento.replace("/", "-");
-                            Date date1=new SimpleDateFormat("yyyy-MM-dd").parse(fechaNacimiento);
+        try {
+            NodeList childNodes = (NodeList) elementoXml.getElementsByTagName("CUENTAS");
+            Element elementosNode = (Element) childNodes.item(0);
+            NodeList childAux = (NodeList) elementosNode.getElementsByTagName("CUENTA");
+            Element elementoAux;
+
+            String codigoCuenta;
+            String fechaCreada;
+            double credito;
+            for(int indexNodo=0;indexNodo<elementosNode.getElementsByTagName("CUENTA").getLength();indexNodo++){
+                        elementoAux = (Element) childAux.item(indexNodo);
+                        try {
+                            codigoCuenta = elementoAux.getElementsByTagName("CODIGO").item(0).getTextContent();
+                            fechaCreada = elementoAux.getElementsByTagName("CREADA").item(0).getTextContent();
+                            credito = Double.parseDouble(elementoAux.getElementsByTagName("CREDITO").item(0).getTextContent());
+                            if(credito<0){
+                                throw new FormatException ("El credito no puede ser negativo ");
+                            }
+                            try {           
+                                fechaNacimiento.replace("/", "-");
+                                Date date1=new SimpleDateFormat("yyyy-MM-dd").parse(fechaNacimiento);
+                            } catch (Exception e) {
+                                throw new FormatException (" No se pudo identificar la fecha de nacimiento de la cuenta, debe estar como en el formato siguiente \" 2020-05-17\" o \" 2020/05/17\" ");
+                            }
+                            codigoCuentas.add(codigoCuenta);
+                            fechaCreacion.add(fechaCreada);
+                            creditos.add(Double.toString(credito));
                         } catch (Exception e) {
-                            throw new FormatException (" No se pudo identificar la fecha de nacimiento de la cuenta, debe estar como en el formato siguiente \" 2020-05-17\" o \" 2020/05/17\" ");
+                            throw new FormatException (" El credito no era un numero ");
                         }
-                        codigoCuentas.add(codigoCuenta);
-                        fechaCreacion.add(fechaCreada);
-                        creditos.add(Double.toString(credito));
-                    } catch (Exception e) {
-                        throw new FormatException (" El credito no era un numero ");
-                    }
-          
+
+            }
+        } catch (Exception e) {
+            return "Formatos Correctos Cliente "+dpi+", Sin cuenta";
         }
         
-        return " Formatos Correctos cliente:"+dpi;
+        
+        return " Formatos Correctos cliente: "+dpi;
     }
     
     public String returnCodigo(){

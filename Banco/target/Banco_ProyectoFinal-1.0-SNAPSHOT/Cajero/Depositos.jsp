@@ -24,6 +24,9 @@
     if(codigoCuentaCliente!=null){
         codigoCuentaCliente = codigoCuentaCliente.split(" ")[1];   
     }
+    if(! new CloseSession().redirigirFueraDelTurno(request, response)){
+        response.sendRedirect("../Cajero/InicioCajero.jsp");
+    }
     %>
     <style>
     #nav1{  

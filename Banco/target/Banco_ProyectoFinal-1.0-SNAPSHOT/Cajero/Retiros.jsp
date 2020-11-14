@@ -23,6 +23,9 @@
     if(codigoCuentaCliente!=null){
         codigoCuentaCliente = codigoCuentaCliente.split(" ")[1];   
     }
+    if(! new CloseSession().redirigirFueraDelTurno(request, response)){
+        response.sendRedirect("../Cajero/InicioCajero.jsp");
+    }
     %>
     <style>
     #nav1{  
@@ -68,7 +71,7 @@ function mensaje() {
                             </div>
                             <hr>
                             
-                            <form method="post" action="../Cajero/AceptarTransaccion.jsp"  >
+                            <form method="post" action="../ManejarDatosTransaccionCajero"  >
                                 
                                 <div class="form-group ">
                                     <label>Numero de Cuenta a Retirar</label>

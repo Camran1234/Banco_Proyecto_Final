@@ -64,7 +64,7 @@ function redirigir() {
                     <div class="card-body">
                       <h5 class="card-title">Datos de la Cuenta:</h5>
                       <p class="card-text">Nombre: <%=nombreReceptor%></p>
-                      <p class="card-text">Número de la Cuenta a Depositar: <%=cuentaReceptora%></p>
+                      <p class="card-text">Número de la Cuenta a Mover: <%=cuentaReceptora%></p>
                       <p class="card-text">Cantidad a Mover: <%=cantidad%></p>
                       <p class="card-text">Tipo Transaccion: <%=tipoTransaccion%></p>
                       <div class="form-group align-center">

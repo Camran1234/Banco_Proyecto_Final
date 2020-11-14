@@ -30,6 +30,11 @@ public class Transaccion {
     private String tipo; 
     private ParserTransaccion parser = new ParserTransaccion();
     
+    /**
+     * Retorna elementos de un nodo de archivo xml, manejado con el parser DOM
+     * @param elementoXML
+     * @throws FormatException 
+     */
     public Transaccion(Element elementoXML) throws FormatException{
         mensaje = parser.obtainElements(elementoXML);
         codigo = parser.returnCodigo();
@@ -41,6 +46,14 @@ public class Transaccion {
         tipo = parser.returnTipo();
     }
     
+    /**
+     * Obtiene parametros que necesitara para subirlo a la base de datos
+     * @param codigo
+     * @param idCajero
+     * @param cuenta
+     * @param monto
+     * @param tipo 
+     */
     public Transaccion(String codigo, String idCajero, String cuenta, String monto, String tipo){
         this.codigo = codigo;
         this.idCajero = idCajero;
@@ -50,6 +63,8 @@ public class Transaccion {
         this.monto = monto;
         this.tipo = tipo;
     }
+    
+    
     
     /**
      * Crea una transaccion y le agrega o quita el dinero dependiendo de la cuenta

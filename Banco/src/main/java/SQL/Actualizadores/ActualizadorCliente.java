@@ -6,10 +6,19 @@
 package SQL.Actualizadores;
 
 import File.ErrorHandlers.FormatException;
+import File.SpecialOptions.Password;
 import File.UploadFiles.Cuenta;
 import SQL.Conexion.Conexion;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 /**
  *
@@ -46,6 +55,21 @@ public class ActualizadorCliente {
         this.direccion = direccion;
         this.fechaNacimiento = fecha;
         this.direccionPdf = path;
+        try {
+            this.encryptPassword(password);
+        } catch (InvalidKeyException ex) {
+            Logger.getLogger(ActualizadorCliente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(ActualizadorCliente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(ActualizadorCliente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoSuchPaddingException ex) {
+            Logger.getLogger(ActualizadorCliente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalBlockSizeException ex) {
+            Logger.getLogger(ActualizadorCliente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (BadPaddingException ex) {
+            Logger.getLogger(ActualizadorCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public String subirArchivo() {
@@ -83,4 +107,18 @@ public class ActualizadorCliente {
         }
     }
     
+    /**
+     * Asigna una contraseña encriptada
+     * @param password
+     * @throws InvalidKeyException
+     * @throws UnsupportedEncodingException
+     * @throws NoSuchAlgorithmException
+     * @throws NoSuchPaddingException
+     * @throws IllegalBlockSizeException
+     * @throws BadPaddingException 
+     */
+    private void encryptPassword(String password)throws InvalidKeyException, UnsupportedEncodingException, NoSuchAlgorithmException,
+            NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException{    
+        this.password = new Password().encryptionPassword(password);
+    }
 }

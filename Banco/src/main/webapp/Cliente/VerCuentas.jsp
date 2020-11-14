@@ -4,6 +4,7 @@
     Author     : camran1234
 --%>
 
+<%@page import="javax.swing.JOptionPane"%>
 <%@page import="File.SpecialOptions.CloseSession"%>
 <%@page import="SQL.Querys.Look.CorroboradorUsuario"%>
 <%@page import="SQL.Get.InfoCuenta"%>
@@ -20,7 +21,7 @@
     String pagina = request.getParameter("redireccion");
     String url = "../Cliente/BancaVirtual.jsp";
     if(pagina!=null){
-        url = "../Cliente/ControlCuentas.jsp";
+        url = pagina;
     }
     %>
     <style>

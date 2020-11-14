@@ -18,6 +18,9 @@
     response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale"
     response.setHeader("Pragma","no-cache");
     new CloseSession().redirigirSesionCerrada(request, response);
+    if(! new CloseSession().redirigirFueraDelTurno(request, response)){
+        response.sendRedirect("../Gerente/InicioGerente.jsp");
+    }
     %>
     <style>
     #nav1{  
@@ -104,7 +107,7 @@ function mensaje() {
                                    <div class="row">
                                        <div class="col-6">
                                            <div class="form-group">
-                                               <label for="cc-exp" class="control-label">Sexo</label>
+                                               <label  class="control-label">Sexo</label>
                                                <select class="form-control" name="Sexo" required>
                                                     <option>Masculino</option>
                                                     <option>Femenino</option>
@@ -113,7 +116,7 @@ function mensaje() {
                                        </div>
                                        <div class="col-6">
                                            <div class="form-group">
-                                               <label for="cc-exp" class="control-label">Turno</label>
+                                               <label  class="control-label">Turno</label>
                                                <div class="input-group">
                                                <select class="form-control" name="Turno" required>
                                                     <option>Matutino</option>

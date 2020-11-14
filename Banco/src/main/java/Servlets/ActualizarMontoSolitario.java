@@ -43,7 +43,7 @@ public class ActualizarMontoSolitario extends HttpServlet {
                   mensaje = new MontoSolitario(monto).subirArchivo();
                   String dpiGerente = new InfoGerente().obtenerDPIGerente((String)request.getSession().getAttribute("Codigo"));
                   String cambios = "Se cambio el monto por: "+monto+ " por el ciudadano con el dpi: "+dpiGerente;
-                  mensaje += " " +new HistorialActualizacion().subirHistorial(cambios, dpiGerente);
+                  mensaje += " " +new HistorialActualizacion().subirHistorial(cambios, dpiGerente, null);
                   //Crear historial
             
         } catch (FormatException ex) {

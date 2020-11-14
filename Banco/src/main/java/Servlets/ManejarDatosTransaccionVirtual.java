@@ -91,7 +91,6 @@ public class ManejarDatosTransaccionVirtual extends HttpServlet {
         request.getSession().setAttribute("Monto", monto);
         request.getSession().setAttribute("Nombre", nombre);
         
-        JOptionPane.showMessageDialog(null, nombre);
         response.sendRedirect("./Cliente/AceptarDeposito.jsp");
     }
 

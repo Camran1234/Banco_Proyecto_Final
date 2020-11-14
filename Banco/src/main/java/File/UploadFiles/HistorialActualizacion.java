@@ -18,11 +18,11 @@ import javax.swing.JOptionPane;
 public class HistorialActualizacion {
     private Time timeA = new Time();
     
-    public String subirHistorial(String descripcion, String dpiGerente){
+    public String subirHistorial(String descripcion, String dpiGerente, String IDUsuario){
         try {
             String fecha = timeA.getTodayDate();
             String hora = timeA.getActualTime();
-            String comando1 = "INSERT INTO HISTORIAL_ACTUALIZACIONES (HoraActualizacion, FechaActualizacion,DescripcionCambio, IDGerente) VALUES (?,?,?,?)";
+            String comando1 = "INSERT INTO HISTORIAL_ACTUALIZACIONES (HoraActualizacion, FechaActualizacion,DescripcionCambio, IDUsuario , IDGerente) VALUES (?,?,?,?,?)";
             //Comprobamos de que no halla repeticiones en el usuario
             Connection connection = new Conexion().CreateConnection();
             PreparedStatement statement = null;
@@ -31,7 +31,8 @@ public class HistorialActualizacion {
             statement.setString(1, hora);
             statement.setString(2, fecha);
             statement.setString(3, descripcion);
-            statement.setString(4, dpiGerente);
+            statement.setString(4, IDUsuario);
+            statement.setString(5, dpiGerente);
             statement.executeUpdate();            
             new Conexion().CloseConnection();
             //Subimos el archivo
