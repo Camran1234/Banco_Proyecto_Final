@@ -40,11 +40,14 @@ public class AceptarSolicitud extends HttpServlet {
         String cuentas = request.getParameter("aceptar");
         String cuentaEmisora = cuentas.split(" ")[0];
         String cuentaReceptora = cuentas.split(" ")[1];
+        JOptionPane.showMessageDialog(null, cuentaEmisora);
+        JOptionPane.showMessageDialog(null, cuentaReceptora);
         AsociacionCuenta asociadorCuentas = new AsociacionCuenta(cuentaReceptora, cuentaEmisora);
         try {
             asociadorCuentas.modificarArchivo("Aceptar");
         } catch (FormatException ex) {
             request.setAttribute("MensajeAceptacionSolicitudes", ex.getMessage());
+            ex.printStackTrace();
         }
         response.sendRedirect("./Cliente/ControlCuentas.jsp");    
         return;

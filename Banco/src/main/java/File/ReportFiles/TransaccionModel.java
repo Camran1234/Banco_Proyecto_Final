@@ -45,7 +45,7 @@ public class TransaccionModel implements Serializable{
         }else if(this.tipo.equalsIgnoreCase("Credito")){
             this.tipo="Deposito";
         }
-        if(idCajero.equalsIgnoreCase("101")){
+        if(idCajero.equalsIgnoreCase("101") && tipo.equalsIgnoreCase("Credito")){
             this.tipo = "Deposito Virtual";
         }
     }

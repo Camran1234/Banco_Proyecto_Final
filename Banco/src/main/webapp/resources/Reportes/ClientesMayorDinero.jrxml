@@ -51,7 +51,7 @@
 		<field name="direccion" class="java.lang.String"/>
 		<field name="sexo" class="java.lang.String"/>
 		<field name="cantidadCuentas" class="java.lang.Integer"/>
-		<field name="total" class="java.lang.String"/>
+		<field name="total" class="java.lang.Double"/>
 	</subDataset>
 	<parameter name="entidadDataSource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
 	<parameter name="CONTEXT" class="java.lang.String"/>

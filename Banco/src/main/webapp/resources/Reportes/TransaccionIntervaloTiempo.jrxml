@@ -61,7 +61,7 @@
 				<textElement verticalAlignment="Middle">
 					<font size="22"/>
 				</textElement>
-				<text><![CDATA[Retiros y Depositos del dia
+				<text><![CDATA[Transacciones Realizadas
 ]]></text>
 			</staticText>
 			<staticText>

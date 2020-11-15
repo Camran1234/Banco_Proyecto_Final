@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,25 +31,38 @@ public class InfoAsociacion {
             ArrayList<String> dpi = new ArrayList<>();
             ArrayList<String> cuentas = new ArrayList<>();
             ArrayList<String> cuentasReceptor = new ArrayList<>();
+            ArrayList<String> cuentasDevueltas = new ArrayList<>();
             //De primero encontramos todas las cuentas pertenecientes a este codigo
             ArrayList<String> codigos = this.GetCodigosCuentas(codigo);
             Connection connection = new Conexion().CreateConnection();
             //Luego agregamos todos los nombres que se vieron involucrados con esta cuenta
-            String comando = "SELECT Nombre,DPI FROM CLIENTE WHERE DPI = (SELECT IDCliente FROM CUENTA WHERE Codigo=(SELECT IDCuentaB FROM CUENTAS_ASOCIADAS WHERE IDCuentaA=? AND Estado=\"Pendiente\"))";
+            String comando1= "SELECT Nombre,DPI FROM CLIENTE WHERE DPI = (SELECT IDCliente FROM CUENTA WHERE Codigo= ?)";
+            String comando2="SELECT IDCuentaB FROM CUENTAS_ASOCIADAS WHERE IDCuentaA=? AND ESTADO=\"Pendiente\"";
             PreparedStatement statement = null;
             for(int indexCuenta=0; indexCuenta<codigos.size(); indexCuenta++){
-                statement = connection.prepareStatement(comando);
+                statement = connection.prepareStatement(comando2);
                 statement.setString(1, codigos.get(indexCuenta));
+                ResultSet resultado = statement.executeQuery();
+                while(resultado.next()){
+                    cuentasDevueltas.add(resultado.getString("IDCuentaB"));
+                }
+            }
+            
+            for(int indexCuenta=0; indexCuenta<cuentasDevueltas.size(); indexCuenta++){
+                statement = connection.prepareStatement(comando1);
+                statement.setString(1, cuentasDevueltas.get(indexCuenta));
                 ResultSet resultado = statement.executeQuery();
                 while(resultado.next()){
                     nombre.add(resultado.getString("Nombre"));
                     dpi.add(resultado.getString("DPI"));
                 }
             }
+            
+            
             //Ahora encontramos el numero de cuenta que pertenece 
-            String comando1 = "SELECT IDCuentaB,IDCuentaA FROM CUENTAS_ASOCIADAS WHERE IDCuentaA=? AND Estado=False";
+            String comando3 = "SELECT IDCuentaB,IDCuentaA FROM CUENTAS_ASOCIADAS WHERE IDCuentaA=? AND Estado=\"Pendiente\"";
             for(int indexCuenta=0; indexCuenta<codigos.size(); indexCuenta++){
-                statement = connection.prepareStatement(comando1);
+                statement = connection.prepareStatement(comando3);
                 statement.setString(1, codigos.get(indexCuenta));
                 ResultSet resultado = statement.executeQuery();
                 while(resultado.next()){

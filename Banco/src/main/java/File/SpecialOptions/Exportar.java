@@ -95,8 +95,6 @@ public class Exportar extends HttpServlet {
                         List<ClienteModel> clientes4 = (List<ClienteModel>) request.getSession().getAttribute("dataExportar");
                         dataSource = new JRBeanCollectionDataSource(clientes4);
                         parameters.put("entidadDataSource", dataSource);                        
-                        parameters.put("Monto", request.getParameter("Monto"));
-                        parameters.put("cuentasPermitidas", request.getParameter("CantidadPermitida"));
                     break;
                 case 5:
                         List<ClienteModel> clientes5 = (List<ClienteModel>) request.getSession().getAttribute("dataExportar");
