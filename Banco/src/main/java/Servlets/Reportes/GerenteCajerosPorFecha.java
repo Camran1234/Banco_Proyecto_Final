@@ -35,7 +35,9 @@ public class GerenteCajerosPorFecha extends HttpServlet {
         try {
             String fechaInicial = request.getParameter("fechaInicial");
             String fechaFinal = request.getParameter("fechaFinal");
-            request.getSession().setAttribute("clientes", reporte.imprimirCajerosPorFecha(fechaInicial, fechaFinal));
+            request.getSession().setAttribute("clientes", reporte.imprimirCajerosPorFecha(fechaInicial, fechaFinal));            
+            request.getSession().setAttribute("fechaInicial", fechaInicial);
+            request.getSession().setAttribute("fechaFinal", fechaFinal);
             response.sendRedirect("./ReportesGerente/CajerosPorFecha.jsp");
         } catch (IOException | NumberFormatException  e) {
             System.out.println("Error: " + e.getMessage());

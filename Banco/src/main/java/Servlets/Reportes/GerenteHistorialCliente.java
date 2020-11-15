@@ -37,6 +37,8 @@ public class GerenteHistorialCliente extends HttpServlet {
             String cantidadInicial = request.getParameter("cantidadInicial");
             String cantidadFinal = request.getParameter("cantidadFinal");
             request.getSession().setAttribute("transaccion", reporte.imprimirHistorialTransaccionCliente(nombre, Double.parseDouble(cantidadInicial), Double.parseDouble(cantidadFinal)));
+            request.getSession().setAttribute("cantidadInicial", cantidadInicial);
+            request.getSession().setAttribute("cantidadFinal", cantidadFinal);
         } catch (NumberFormatException  e) {
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();

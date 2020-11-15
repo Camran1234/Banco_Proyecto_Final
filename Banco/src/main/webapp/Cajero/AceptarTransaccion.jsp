@@ -7,10 +7,7 @@
 <%@page import="SQL.Get.InfoCuenta"%>
 <%@page import="SQL.Querys.Look.CorroboradorCuenta"%>
 <%@page import="File.SpecialOptions.CloseSession"%>
-<%  response.setHeader("Cache-Control","no-cache"); //Forces caches to obtain a new copy of the page from the origin server
-    response.setHeader("Cache-Control","no-store"); //Directs caches not to store the page under any circumstance
-    response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale"
-    response.setHeader("Pragma","no-cache");
+<%   
     new CloseSession().redirigirSesionCerrada(request, response);
     //Obtenemos los valores enviados desde el servlet
 

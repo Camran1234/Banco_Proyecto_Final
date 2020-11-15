@@ -18,20 +18,19 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    response.setHeader("Cache-Control","no-cache"); //Forces caches to obtain a new copy of the page from the origin server
-    response.setHeader("Cache-Control","no-store"); //Directs caches not to store the page under any circumstance
-    response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale"
-    response.setHeader("Pragma","no-cache");
+
     new CloseSession().redirigirSesionCerrada(request, response);
     List<TransaccionModel> listaTransaccion = (List<TransaccionModel>) session.getAttribute("transaccion");
-    String codigoCliente = request.getParameter("Codigo");        
-    if(codigoCliente!=null){    
-        codigoCliente = codigoCliente.split(" ")[1];    
-    }else{
-        codigoCliente="";
+    String cantidadInicial = (String) session.getAttribute("cantidadInicial");
+    String cantidadFinal = (String) session.getAttribute("cantidadFinal");
+    if(cantidadInicial==null){
+        cantidadInicial="";
+        cantidadFinal="";
     }
     
    session.removeAttribute("transaccion");
+   session.removeAttribute("cantidadInicial");
+   session.removeAttribute("cantidadFinal");
     %>
     <style>
     #nav1{  
@@ -78,7 +77,7 @@
                                                 <div class="col-6">
                                                     <div class="form-group">
                                                         <label class="Text">Cliente a Buscar</label>
-                                                        <input type="text" name="nombreCliente" placeholder="Coloque un nombre del cliente..." value="<%=codigoCliente%>" />
+                                                        <input type="text" name="nombreCliente" placeholder="Coloque un nombre del cliente..."  />
                                                     </div>
                                                 </div>
                                             </div><br>
@@ -88,7 +87,7 @@
                                                         <label class="Text">Cantidad Inicial</label>
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="basic-addon1">Q</span>
-                                                            <input type="text" name="cantidadInicial" placeholder="Dinero Inicial en la Cuenta..."  required/>
+                                                            <input type="text" name="cantidadInicial" placeholder="Dinero Inicial en la Cuenta..." value="<%=cantidadInicial%>" required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -97,7 +96,7 @@
                                                         <label class="Text">Cantidad Final</label>
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text" id="basic-addon1">Q</span>
-                                                            <input type="text" name="cantidadFinal" placeholder="Dinero Inicial en la Cuenta..."  required/>
+                                                            <input type="text" name="cantidadFinal" placeholder="Dinero Inicial en la Cuenta..." value="<%=cantidadFinal%>"  required/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -107,7 +106,19 @@
                                         </form>
                                 <br>
                                 <form method="post" action="../Exportar">
-                                    <input class="btn btn-warning btn-lg btn-block" type="submit"   value ="Exportar" >
+                                    <input type="hidden" name="Valor" value="6">
+                                    <input type="hidden" name="montoInicial" value="<%=cantidadInicial%>">
+                                    <input type="hidden" name="montoFinal" value="<%=cantidadFinal%>">
+                                    <input type="hidden" name="url" value="HistorialTransaccionCliente">
+                                    <input type="hidden" name="urlCompleta" value="./ReportesGerente/HistorialTransaccionCliente.jsp">
+                                    <%if(listaTransaccion!=null){%>
+                                    <label>Guardar Como:</label>
+                                    <%session.setAttribute("dataExportar", listaTransaccion);%>
+                                    <br>
+                                    <input type="text" placeholder="Nombre para el archivo pdf..." name="nombreArchivo" required/>
+                                    <br>
+                                    <input class="btn btn-warning btn-lg btn-block" type="submit"   value ="Guardar y Exportar" >
+                                    <%}%>
                                 </form>
                             </div>
                         </div>
@@ -127,20 +138,22 @@
                 <th scope="col">Tipo</th>
                 <th scope="col">Fecha Creada</th>
                 <th scope="col">Hora Creada</th>
+                <th scope="col">Codigo Cajero Encargado</th>
             </tr>
             <% if(listaTransaccion!=null){
                 for(int index=0;index<listaTransaccion.size(); index++){
-                    listaTransaccion.get(index).setPropietarioCuenta(new InfoCuenta().getNameOfCode(listaTransaccion.get(index).getCuenta()));
+                    listaTransaccion.get(index).setNombrePropietarioCuenta(new InfoCuenta().getNameOfCode(listaTransaccion.get(index).getCuenta()));
                 %>
                 <tr>
                     <td><%=index+1 %></td>
                     <td><%= listaTransaccion.get(index).getCodigo() %></td>
                     <td><%=listaTransaccion.get(index).getCuenta()%></td>
-                    <td><%=listaTransaccion.get(index).getPropietarioCuenta()%></td>
+                    <td><%=listaTransaccion.get(index).getNombrePropietarioCuenta()%></td>
                     <td><%=listaTransaccion.get(index).getMonto()%></td>
                     <td><%=listaTransaccion.get(index).getTipo()%></td>
                     <td><%=listaTransaccion.get(index).getFechaCreacion()%></td>
                     <td><%=listaTransaccion.get(index).getHoraCreacion()%></td>
+                    <td><%=listaTransaccion.get(index).getCajero()%></td>
                 </tr>
             <%}}%>
         </table>

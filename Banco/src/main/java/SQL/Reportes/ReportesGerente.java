@@ -127,10 +127,9 @@ public class ReportesGerente {
             //Obtenemos las transacciones realizadas por los clientes en una fecha especifica, retornando la cantidad de transacciones realizadas y los montos realizados
             String comando = "SELECT COUNT(*) AS Cantidad, SUM(T.MONTO) AS Total,  CL.Nombre, T.Monto, CL.NoUsuario, CL.DPI, CL.FechaNacimiento, CL.Direccion, CL.Sexo "
                     + "FROM TRANSACCION T LEFT JOIN CUENTA C ON T.Cuenta = C.Codigo LEFT JOIN CLIENTE CL ON C.IDCliente = CL.DPI "
-                    + "WHERE T.FechaRealizacion = ? GROUP BY CL.Nombre";
+                    + " GROUP BY CL.Nombre";
             PreparedStatement statement = null;
             statement = connection.prepareStatement(comando);
-            statement.setString(1, fecha);
             ResultSet resultado = statement.executeQuery();
             while(resultado.next()){
                 clientes.add(new ClienteModel(
@@ -152,7 +151,7 @@ public class ReportesGerente {
                 double totalPermitido = resultado.getDouble("Monto");
                 //Ahora quitaremos los clientes que no superan ese limite
                 for(int indexClientes=0; indexClientes<clientes.size(); indexClientes++){
-                    if( (clientes.get(indexClientes).getTotal()<totalPermitido) && (clientes.get(indexClientes).getCantidadCuentas()<=cantidadCuentasPermitidas )){
+                    if( (clientes.get(indexClientes).getTotal()<totalPermitido) || (clientes.get(indexClientes).getCantidadCuentas()<=cantidadCuentasPermitidas && (clientes.get(indexClientes).getTotal()<totalPermitido))){
                         clientes.remove(indexClientes);
                         indexClientes=-1;
                     }

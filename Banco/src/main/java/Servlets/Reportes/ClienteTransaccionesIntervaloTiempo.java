@@ -41,6 +41,8 @@ public class ClienteTransaccionesIntervaloTiempo extends HttpServlet {
             request.getSession().setAttribute("transaccion", reportes.imprimirTransaccionesIntervaloTiempo(codigo,fechaInicio, fechaFinal));
             request.getSession().setAttribute("nombre", new CorroboradorUsuario().getName(codigo));
             request.getSession().setAttribute("dpi", new CorroboradorUsuario().getDpi(codigo));
+            request.getSession().setAttribute("fechaInicial", fechaInicio);
+            request.getSession().setAttribute("fechaFinal", fechaFinal);
             response.sendRedirect("./ReportesCliente/TransaccionesIntervaloTiempo.jsp");
         } catch (IOException | NumberFormatException  e) {
             System.out.println("Error: " + e.getMessage());

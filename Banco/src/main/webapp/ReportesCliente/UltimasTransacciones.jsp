@@ -15,10 +15,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    response.setHeader("Cache-Control","no-cache"); //Forces caches to obtain a new copy of the page from the origin server
-    response.setHeader("Cache-Control","no-store"); //Directs caches not to store the page under any circumstance
-    response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale"
-    response.setHeader("Pragma","no-cache");
+
     new CloseSession().redirigirSesionCerrada(request, response);
     String nombre = (String) session.getAttribute("nombre");
     String dpi = (String) session.getAttribute("dpi");
@@ -76,7 +73,19 @@
                                 </form>
                                 <br>
                                 <form method="post" action="../Exportar">
-                                    <input class="btn btn-warning btn-lg btn-block" type="submit"   value ="Exportar" >
+                                    <input type="hidden" name="Valor" value="10">
+                                    <input type="hidden" name="url" value="UltimasTransacciones">
+                                    <input type="hidden" name="urlCompleta" value="./ReportesCliente/UltimasTransacciones.jsp">
+                                    <%if(listaTransaccion!=null){%>
+                                    <input type="hidden" name="nombre" value="<%=nombre%>">
+                                    <input type="hidden" name="dpi" value="<%=dpi%>">
+                                    <label>Guardar Como:</label>
+                                    <%session.setAttribute("dataExportar", listaTransaccion);%>
+                                    <br>
+                                    <input type="text" placeholder="Nombre para el archivo pdf..." name="nombreArchivo" required/>
+                                    <br>
+                                    <input class="btn btn-warning btn-lg btn-block" type="submit"   value ="Guardar y Exportar" >
+                                    <%}%>
                                 </form>
                             </div>
                         </div>
@@ -103,7 +112,7 @@
                 <tr>
                     <td><%=index+1 %></td>
                     <td><%= listaTransaccion.get(index).getCodigo() %></td>
-                    <td><%=listaTransaccion.get(index).getIDCajero()%></td>
+                    <td><%=listaTransaccion.get(index).getCajero()%></td>
                     <td><%=listaTransaccion.get(index).getCuenta()%></td>
                     <td><%=listaTransaccion.get(index).getMonto()%></td>
                     <td><%=listaTransaccion.get(index).getTipo()%></td>

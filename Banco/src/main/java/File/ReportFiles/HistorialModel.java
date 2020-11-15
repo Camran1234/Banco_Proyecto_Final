@@ -5,11 +5,13 @@
  */
 package File.ReportFiles;
 
+import java.io.Serializable;
+
 /**
  *
  * @author camran1234
  */
-public class HistorialModel {    
+public class HistorialModel implements Serializable{    
     private String noActualizacion;
     private String fechaActualizacion;
     private String horaActualizacion;

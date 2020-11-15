@@ -19,10 +19,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    response.setHeader("Cache-Control","no-cache"); //Forces caches to obtain a new copy of the page from the origin server
-    response.setHeader("Cache-Control","no-store"); //Directs caches not to store the page under any circumstance
-    response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale"
-    response.setHeader("Pragma","no-cache");
     new CloseSession().redirigirSesionCerrada(request, response);
     List<CajeroModel> listaCajeros = (List<CajeroModel>) session.getAttribute("clientes");
     String fechaInicial = (String)session.getAttribute("fechaInicial");
@@ -95,7 +91,19 @@
                                 </form>
                                 <br>
                                 <form method="post" action="../Exportar">
-                                    <input class="btn btn-warning btn-lg btn-block" type="submit"   value ="Exportar" >
+                                    <input type="hidden" name="Valor" value="7">
+                                    <input type="hidden" name="url" value="CajerosPorFecha">
+                                    <input type="hidden" name="fechaInicial" value="<%= fechaInicial%>">
+                                    <input type="hidden" name="fechaFinal" value="<%= fechaFinal%>">
+                                    <input type="hidden" name="urlCompleta" value="./ReportesGerente/CajerosPorFecha.jsp">
+                                    <%if(listaCajeros!=null){%>
+                                    <label>Guardar Como:</label>
+                                    <%session.setAttribute("dataExportar", listaCajeros);%>
+                                    <br>
+                                    <input type="text" placeholder="Nombre para el archivo pdf..." name="nombreArchivo" required/>
+                                    <br>
+                                    <input class="btn btn-warning btn-lg btn-block" type="submit"   value ="Guardar y Exportar" >
+                                    <%}%>
                                 </form>
                             </div>
                         </div>

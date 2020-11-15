@@ -5,12 +5,14 @@
  */
 package File.ReportFiles;
 
+import java.io.Serializable;
+
 /**
  *
  * @author camran1234
  */
-public class ClienteModel {
-    private int cantidad;
+public class ClienteModel implements Serializable{
+    private int cantidadCuentas;
     private double total;
     private String nombre;
     private String noUsuario;
@@ -34,7 +36,7 @@ public class ClienteModel {
         this.fechaNacimiento = fechaNacimiento;
         this.direccion = direccion;
         this.sexo = sexo;
-        this.cantidad = cantidad;
+        this.cantidadCuentas = cantidad;
         this.total = total; 
     }
     
@@ -63,7 +65,7 @@ public class ClienteModel {
     }
     
     public int getCantidadCuentas(){
-        return cantidad;
+        return cantidadCuentas;
     }
     
     public double getTotal(){

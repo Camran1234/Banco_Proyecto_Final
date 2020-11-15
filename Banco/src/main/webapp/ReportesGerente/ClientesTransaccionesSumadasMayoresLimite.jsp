@@ -19,10 +19,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    response.setHeader("Cache-Control","no-cache"); //Forces caches to obtain a new copy of the page from the origin server
-    response.setHeader("Cache-Control","no-store"); //Directs caches not to store the page under any circumstance
-    response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale"
-    response.setHeader("Pragma","no-cache");
+
     new CloseSession().redirigirSesionCerrada(request, response);
     List<ClienteModel> listaClientes = (List<ClienteModel>) session.getAttribute("clientes");
     String fecha = (String) session.getAttribute("fecha");
@@ -75,16 +72,24 @@
                                 </div>
                                 <hr>
                                 <form method="post" action="../GerenteTransaccionesSumadasLimite">
-                                    <div class="form-group">
-                                                <label for="cc-exp" class="control-label">Fecha Final</label>
-                                                <input class="form-control" type="date" name="fecha" min="1900-01-01" max="2500-01-31"required>        
-                                    </div>
                                     <hr><br>
                                     <input class="btn btn-success btn-lg btn-block" type="submit"   value ="Generar Reporte" >
                                 </form>
                                 <br>
                                 <form method="post" action="../Exportar">
-                                    <input class="btn btn-warning btn-lg btn-block" type="submit"   value ="Exportar" >
+                                    <input type="hidden" name="Valor" value="3">
+                                    <input type="hidden" name="Monto" value="<%=new InfoMonto().obtenerMontoMultiple()%>">
+                                    <input type="hidden" name="CantidadPermitida" value="<%=new InfoMonto().obtenerCantidadCuentas()%>">
+                                    <input type="hidden" name="url" value="ClientesTransaccionesSumadasMayoresLimite">
+                                    <input type="hidden" name="urlCompleta" value="./ReportesGerente/ClientesTransaccionesSumadasMayoresLimite.jsp">
+                                    <%if(listaClientes!=null){%>
+                                    <label>Guardar Como:</label>
+                                    <%session.setAttribute("dataExportar", listaClientes);%>
+                                    <br>
+                                    <input type="text" placeholder="Nombre para el archivo pdf..." name="nombreArchivo" required/>
+                                    <br>
+                                    <input class="btn btn-warning btn-lg btn-block" type="submit"   value ="Guardar y Exportar" >
+                                    <%}%>
                                 </form>
                             </div>
                         </div>

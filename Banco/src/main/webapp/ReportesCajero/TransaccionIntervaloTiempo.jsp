@@ -14,10 +14,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    response.setHeader("Cache-Control","no-cache"); //Forces caches to obtain a new copy of the page from the origin server
-    response.setHeader("Cache-Control","no-store"); //Directs caches not to store the page under any circumstance
-    response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale"
-    response.setHeader("Pragma","no-cache");
+
     new CloseSession().redirigirSesionCerrada(request, response);
     List<TransaccionModel> listaTransaccion = (List<TransaccionModel>) session.getAttribute("transaccion");
     String fechaInicial = (String)session.getAttribute("fechaInicial");
@@ -76,7 +73,7 @@
                                 <div class="card-title">
                                     <h2 class="text-center" id="text" >Transacciones Realizadas</h2>
                                     <%if(listaTransaccion!=null){%>
-                                         <h5 class="text-center" id="text" >ID: <%=listaTransaccion.get(0).getIDCajero()%></h5>
+                                         <h5 class="text-center" id="text" >ID: <%=listaTransaccion.get(0).getCajero()%></h5>
                                          <h5 class="text-center" id="text" >Fecha Inicial: <%= fechaInicial%> Fecha Final: <%= fechaFinal%></h5>
                                          <h5 class="text-center" id="text" >Hora Inicial: <%= horaInicial%> Hora Final: <%= horaFinal%></h5>
                                     <%}%>
@@ -117,7 +114,23 @@
                                 </form>
                                 <br>
                                 <form method="post" action="../Exportar">
-                                    <input class="btn btn-warning btn-lg btn-block" type="submit"   value ="Exportar" >
+                                    <input type="hidden" name="Valor" value="9">
+                                    <input type="hidden" name="url" value="TransaccionIntervaloTiempo">
+                                    <input type="hidden" name="urlCompleta" value="./ReportesCajero/TransaccionIntervaloTiempo.jsp">
+                                    <%if(listaTransaccion!=null){%>                                    
+                                    <input type="hidden" name="idCajero" value="<%=listaTransaccion.get(0).getCajero()%>">
+                                    <input type="hidden" name="fechaInicial" value="<%=fechaInicial%>">
+                                    <input type="hidden" name="fechaFinal" value="<%=fechaFinal%>">
+                                    <input type="hidden" name="horaInicial" value="<%=horaInicial%>">
+                                    <input type="hidden" name="horaFinal" value="<%=horaFinal%>">
+                                    <input type="hidden" name="balanceFinal" value="<%=totalMonto%>">
+                                    <label>Guardar Como:</label>
+                                    <%session.setAttribute("dataExportar", listaTransaccion);%>
+                                    <br>
+                                    <input type="text" placeholder="Nombre para el archivo pdf..." name="nombreArchivo" required/>
+                                    <br>
+                                    <input class="btn btn-warning btn-lg btn-block" type="submit"   value ="Guardar y Exportar" >
+                                    <%}%>
                                 </form>
                             </div>
                         </div>

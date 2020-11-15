@@ -42,6 +42,8 @@ public class ClienteCuentaMasDinero extends HttpServlet {
             CuentaModel cuentaModel = reportes.imprimirCuentaMayorDinero(codigo);
             request.getSession().setAttribute("transaccion", reportes.imprimirTransaccionesCuenta(cuentaModel.getCodigo(),fechaInicio, fechaFinal));
             request.getSession().setAttribute("cuentas", cuentaModel);
+            request.getSession().setAttribute("fechaInicial", fechaInicio);
+            request.getSession().setAttribute("fechaFinal", fechaFinal);
             request.getSession().setAttribute("nombre", new CorroboradorUsuario().getName(codigo));
             request.getSession().setAttribute("dpi", new CorroboradorUsuario().getDpi(codigo));
             response.sendRedirect("./ReportesCliente/CuentaMasDinero.jsp");

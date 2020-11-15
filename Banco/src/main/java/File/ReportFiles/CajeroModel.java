@@ -5,17 +5,18 @@
  */
 package File.ReportFiles;
 
+import java.io.Serializable;
+
 /**
  * Contiene un modelo para reportes de cajero
  * @author camran1234
  */
-public class CajeroModel {
+public class CajeroModel implements Serializable{
     private String turno;
-    private String codigo;
+    private String noUsuario;
     private String nombre;
     private String sexo;
     private String dpi;
-    private String mensaje;
     private String direccion;
     private String cantidad;
     
@@ -25,7 +26,7 @@ public class CajeroModel {
         this.direccion=direccion;
         this.sexo=sexo;
         this.turno = turno;
-        this.codigo = codigoUsuario;
+        this.noUsuario = codigoUsuario;
         this.cantidad = cantidad;
     }
     
@@ -45,7 +46,7 @@ public class CajeroModel {
         return turno;
     }
     public String getNoUsuario(){
-        return codigo;
+        return noUsuario;
     }
     public String getCantidad(){
         return cantidad;

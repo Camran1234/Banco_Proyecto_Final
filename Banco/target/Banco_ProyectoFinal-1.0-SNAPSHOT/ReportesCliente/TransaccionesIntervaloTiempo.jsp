@@ -16,17 +16,18 @@
 <%@page import="javax.swing.JOptionPane"%>
 <!DOCTYPE html>
 <%
-    response.setHeader("Cache-Control","no-cache"); //Forces caches to obtain a new copy of the page from the origin server
-    response.setHeader("Cache-Control","no-store"); //Directs caches not to store the page under any circumstance
-    response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale"
-    response.setHeader("Pragma","no-cache");
+
     new CloseSession().redirigirSesionCerrada(request, response);
     String nombre = (String) session.getAttribute("nombre");
     String dpi = (String) session.getAttribute("dpi");
     List<TransaccionModel> listaTransaccion = (List<TransaccionModel>) session.getAttribute("transaccion");
+    String fechaInicial = (String) session.getAttribute("fechaInicial");
+    String fechaFinal = (String) session.getAttribute("fechaFinal");
     session.removeAttribute("nombre");
     session.removeAttribute("dpi");
     session.removeAttribute("transaccion");
+    session.removeAttribute("fechaInicial");
+    session.removeAttribute("fechaFinal");
     %>
     <style>
     #nav1{  
@@ -91,7 +92,21 @@
                                 </form>
                                 <br>
                                 <form method="post" action="../Exportar">
-                                    <input class="btn btn-warning btn-lg btn-block" type="submit"   value ="Exportar" >
+                                    <input type="hidden" name="Valor" value="11">
+                                    <input type="hidden" name="url" value="TransaccionIntervaloTiempoCliente">
+                                    <input type="hidden" name="urlCompleta" value="./ReportesCliente/TransaccionesIntervaloTiempo.jsp">
+                                    <%if(listaTransaccion!=null){%>
+                                    <input type="hidden" name="nombre" value="<%=nombre%>">
+                                    <input type="hidden" name="dpi" value="<%=dpi%>">
+                                    <input type="hidden" name="fechaInicial" value="<%=fechaInicial%>">
+                                    <input type="hidden" name="fechaFinal" value="<%=fechaFinal%>">
+                                    <label>Guardar Como:</label>
+                                    <%session.setAttribute("dataExportar", listaTransaccion);%>
+                                    <br>
+                                    <input type="text" placeholder="Nombre para el archivo pdf..." name="nombreArchivo" required/>
+                                    <br>
+                                    <input class="btn btn-warning btn-lg btn-block" type="submit"   value ="Guardar y Exportar" >
+                                    <%}%>
                                 </form>
                                 
                             </div>
@@ -119,7 +134,7 @@
                 <tr>
                     <td><%=index+1 %></td>
                     <td><%= listaTransaccion.get(index).getCodigo() %></td>
-                    <td><%=listaTransaccion.get(index).getIDCajero()%></td>
+                    <td><%=listaTransaccion.get(index).getCajero()%></td>
                     <td><%=listaTransaccion.get(index).getCuenta()%></td>
                     <td><%=listaTransaccion.get(index).getMonto()%></td>
                     <td><%=listaTransaccion.get(index).getTipo()%></td>

@@ -5,11 +5,13 @@
  */
 package File.ReportFiles;
 
+import java.io.Serializable;
+
 /**
  *
  * @author camran1234
  */
-public class CuentaModel {
+public class CuentaModel implements Serializable{
     private double credito;
     private String fecha;
     private String codigo;

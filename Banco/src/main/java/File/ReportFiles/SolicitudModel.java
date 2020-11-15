@@ -6,13 +6,14 @@
 package File.ReportFiles;
 
 import SQL.Get.InfoCuenta;
+import java.io.Serializable;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author camran1234
  */
-public class SolicitudModel {
+public class SolicitudModel implements Serializable{
      
     private String cuentaEmisora;    
     private String cuentaReceptora;

@@ -19,10 +19,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    response.setHeader("Cache-Control","no-cache"); //Forces caches to obtain a new copy of the page from the origin server
-    response.setHeader("Cache-Control","no-store"); //Directs caches not to store the page under any circumstance
-    response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale"
-    response.setHeader("Pragma","no-cache");
     new CloseSession().redirigirSesionCerrada(request, response);
     List<ClienteModel> listaClientes = (List<ClienteModel>) session.getAttribute("clientes");
     session.removeAttribute("clientes");
@@ -73,7 +69,17 @@
                                 </form>
                                 <br>
                                 <form method="post" action="../Exportar">
-                                    <input class="btn btn-warning btn-lg btn-block" type="submit"   value ="Exportar" >
+                                    <input type="hidden" name="Valor" value="4">
+                                    <input type="hidden" name="url" value="ClientesMayorDinero">
+                                    <input type="hidden" name="urlCompleta" value="./ReportesGerente/ClientesMayorDinero.jsp">
+                                    <%if(listaClientes!=null){%>
+                                    <label>Guardar Como:</label>
+                                    <%session.setAttribute("dataExportar", listaClientes);%>
+                                    <br>
+                                    <input type="text" placeholder="Nombre para el archivo pdf..." name="nombreArchivo" required/>
+                                    <br>
+                                    <input class="btn btn-warning btn-lg btn-block" type="submit"   value ="Guardar y Exportar" >
+                                    <%}%>
                                 </form>
                             </div>
                         </div>
