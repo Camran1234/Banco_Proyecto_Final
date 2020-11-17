@@ -246,6 +246,8 @@ public class ReportesGerente {
     /**
      * Devuelve el historial de un cliente
      * @param nombre
+     * @param cantidadInicial
+     * @param cantidadFinal
      * @return 
      */
     public List<TransaccionModel> imprimirHistorialTransaccionCliente(String nombre, double cantidadInicial, double cantidadFinal){

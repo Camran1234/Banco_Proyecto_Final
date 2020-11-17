@@ -91,7 +91,7 @@
 <body>
     
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark" id='nav1'>
-        <a class="navbar-brand" href="../index.jsp" id='textImage'><img src ="../resources/LogoBanco.png" height="100" width="100"   />Banco Anillado</a>
+        <a class="navbar-brand" href="../index.jsp" id='textImage'><img src ="../resources/LogoBanco.png" height="100" width="100"   />El Billeton</a>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <a class="nav-link" href="../index.jsp" id='text'>Inicio</a>
