@@ -58,6 +58,7 @@ Servlets/CreateUser.class
 Servlets/ManejarDatosTransaccionCajero.class
 Servlets/CrearCajero.class
 File/XmlParser/FileScanner.class
+SQL/Querys/Look/CorroboradorCajero.class
 Servlets/ActualizarGerente.class
 File/ParserData/ParserEmpleado.class
 File/ReportFiles/CuentaModel.class
@@ -67,6 +68,7 @@ File/ReportFiles/SolicitudModel.class
 Servlets/ActualizarMontoMultiple.class
 SQL/Reportes/ReportesGerente.class
 Servlets/ActualizarCliente.class
+SQL/Get/InfoMontos.class
 SQL/Querys/Look/CorroboradorCuentaAsociada.class
 Servlets/Reportes/CajeroTransaccionesTiempo.class
 SQL/Actualizadores/ActualizadorCliente.class
